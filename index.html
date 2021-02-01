@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5toCode Portfolio Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+        integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,900|Source+Sans+Pro:300,900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="/index.html"><img src="img/5toCode.png" alt=""></a>
+        </div>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
+                <li class="nav__item"><a href="#about" class="nav__link">About Me</a></li>
+                <li class="nav__item"><a href="#work" class="nav__link">My Work</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Introduction -->
+    <section class="intro" id="home">
+        <h1 class="section__title section__title--intro">
+            Hi, I am <strong>Mike Roberts</strong>
+        </h1>
+        <p class="section__subtitle section__subtitle--intro">A Full Stack Web Developer</p>
+        <img src="img/mike_headshot_blackbg.JPG" alt="a picture of Mike smiling" class="intro__img">
+
+    </section>
+
+    <!-- My Services -->
+    <section class="my-services" id="services">
+        <h2 class="section__title section__title--services">What I do</h2>
+        <div class="services">
+            <div class="service">
+                <!-- Service -->
+                <h3>Websites</h3>
+                <p>Beautiful, mobile-friendly websites for businesses and organizations who want to make a great first impression on the Internet.</p>
+            </div>
+            <div class="service">
+                <!-- Service -->
+                <h3>Web Applications</h3>
+                <p>Interactive web applications with optional API and database integration.</p>
+            </div>
+            <div class="service">
+                <!-- Service -->
+                <h3>E-Commerce</h3>
+                <p>Seamless buying & selling of your product/service over the Internet, using platforms such as Shopify, Square, and BigCommerce.</p>
+            </div>
+        </div> <!-- / Services -->
+
+        <a href="#work" class="btn">My Work</a>
+    </section>
+
+    <!-- About Me -->
+    <section class="about-me" id="about">
+        <h2 class="section__title section__title--about">Who I Am</h2>
+        <p class="section__subtitle section__subtitle--about">A Web Developer based in Watersound, Florida</p>
+
+        <div class="about-me__body">
+            <p>I enjoy helping businesses and organizations create beautiful, functional websites and web applications that make a great impression on the Internet.</p>
+            <p>What sets me apart from other web developers? I find out what my client's ideal outcomes look like, and work backwards from there to deliver on that vision.</p>
+            <p>Out of the office you'll probably find me being dragged around our neighborhood by our three dogs, or in our garage which we've converted to a home gym.</p>
+        </div>
+        <img src="img/IMG_2163_2.png" class="about-me__img" alt="mike in germany">
+    </section>
+
+    <!-- My Work -->
+    <section class="my-work" id="work">
+        <h2 class="section__title section__title--work">My Work</h2>
+        <p class="section__subtitle section__subtitle--work"></p>
+
+        <div class="portfolio">
+            <!-- Portfolio Item 01 -->
+            <a href="easybank.html" class="portfolio__item">
+                <img src="img/easybank.png" class="portfolio__img" alt="Easybank project">
+            </a>
+
+            <!-- Portfolio Item 02 -->
+            <a href="yelpcamp.html" class="portfolio__item">
+                <img src="img/yelpcamp.png" class="portfolio__img" alt="Yelpcamp project">
+            </a>
+
+            <!-- Portfolio Item 03 -->
+            <a href="museumofcandy.html" class="portfolio__item">
+                <img src="img/museumofcandy.png" class="portfolio__img" alt="Museum of candy project">
+            </a>
+
+
+            <!-- Portfolio Item 04 -->
+            <a href="colorgame.html" class="portfolio__item">
+                <img src="img/colorgame.png" class="portfolio__img" alt="color game project">
+            </a>
+
+            <!-- Portfolio Item 05 -->
+            <a href="fotomatic.html" class="portfolio__item">
+                <img src="img/fotomatic.png" class="portfolio__img" alt="fotomatic project">
+            </a>
+
+            <!-- Portfolio Item 06 -->
+            <a href="simongame.html" class="portfolio__item">
+                <img src="img/simongame.png" class="portfolio__img" alt="portfolio image">
+            </a>
+
+            <!-- Portfolio Item 07 -->
+            <a href="tindog.html" class="portfolio__item">
+                <img src="img/tindog.png" class="portfolio__img" alt="portfolio image">
+            </a>
+
+            <!-- Portfolio Item 08 -->
+            <a href="number_guesser.html" class="portfolio__item">
+                <img src="img/number.png" class="portfolio__img" alt="portfolio image">
+            </a>
+
+            <!-- Portfolio Item 09 -->
+            <a href="drumkit.html" class="portfolio__item">
+                <img src="img/drumkit.png" class="portfolio__img" alt="portfolio image">
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <a href="mailto:mike@5tocode.dev" class="footer__link">mike@5tocode.dev</a>
+        <ul class="social-list">
+            <li class="social-list__item social-list__link">
+                <a href="https://codepen.io/5tocode">
+                    <i class="fab fa-codepen"></i>
+                </a>
+            </li>
+            <li class="social-list__item social-list__link">
+                <a href="https://linkedin.com/in/5tocode">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </li>
+            <li class="social-list__item social-list__link">
+                <a href="https://twitter.com/5tocode">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li class="social-list__item social-list__link">
+                <a href="https://github.com/5toCode">
+                    <i class="fab fa-github"></i>
+                </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>
