@@ -91,6 +91,10 @@ strong {
     transform: scale(1.1);
 }
 
+.btn--light {
+    color: var(--clr-light);
+}
+
 
 /* Typography */
 
@@ -129,6 +133,7 @@ h3 {
 .section__subtitle {
     margin: 0;
     font-size: var(--fs-h3);
+    color: var(--clr-light);
 }
 
 .section__subtitle--intro,
@@ -310,7 +315,7 @@ header {
     background-color: var(--clr-dark);
     background-image: url(../img/services-bg.jpg);
     background-size: cover;
-    /* background-blend-mode: overlay; */
+    background-blend-mode: overlay;
     color: var(--clr-light);
     text-align: center;
 }
@@ -327,7 +332,7 @@ header {
     height: 1px;
     margin: 0.5em auto 1em;
     background: var(--clr-light);
-    opacity: 0.25;
+    opacity: .25;
 }
 
 .services {
@@ -452,6 +457,7 @@ header {
 
 .footer__link {
     font-weight: var(--fw-bold);
+    transition: all 200ms;
 }
 
 .footer__link:hover,
