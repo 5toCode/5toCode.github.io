@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TimerIQ - Smart Interval Timer for iPhone</title>
+  <meta name="description" content="TimerIQ is a powerful iOS interval timer with AMRAP, EMOM, For Time, Tabata, and Custom modes, plus audio and voice cues.">
+  <style>
+    :root {
+      --bg: #050608;
+      --card: #121419;
+      --text: #f4f7fb;
+      --muted: #a7b0bf;
+      --line: #232833;
+      --brand: #20a5ff;
+      --amrap: #f26b3f;
+      --emom: #a248eb;
+      --fortime: #4280ef;
+      --tabata: #1fc7ac;
+      --custom: #586074;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top, #11131a 0%, var(--bg) 35%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 72px 0 40px;
+      text-align: center;
+    }
+    .logo {
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+    .logo .iq { color: var(--brand); }
+    .tagline {
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      max-width: 760px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #171a22;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .btn.primary {
+      background: linear-gradient(180deg, #2cb1ff, #0f8fe5);
+      border-color: #118ad8;
+      color: white;
+    }
+
+    section { padding: 30px 0; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 3.4vw, 2rem);
+    }
+    .lead {
+      color: var(--muted);
+      margin: 0 0 20px;
+      max-width: 920px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: linear-gradient(180deg, #171b25, #131720);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .modes {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    @media (max-width: 960px) {
+      .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .modes { grid-template-columns: 1fr; }
+    }
+    .mode {
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px;
+      min-height: 150px;
+    }
+    .mode h3 { margin: 0 0 8px; font-size: 1rem; }
+    .mode p { margin: 0; font-size: 0.93rem; color: rgba(255,255,255,0.92); }
+    .amrap { background: linear-gradient(180deg, #f57a52, var(--amrap)); }
+    .emom { background: linear-gradient(180deg, #b45cff, var(--emom)); }
+    .fortime { background: linear-gradient(180deg, #5d95fb, var(--fortime)); }
+    .tabata { background: linear-gradient(180deg, #39dbc2, var(--tabata)); }
+    .custom { background: linear-gradient(180deg, #6d778f, var(--custom)); }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 960px) {
+      .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .shots { grid-template-columns: 1fr; }
+    }
+    .shot {
+      background: #0f1218;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .shot img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9 / 19.5;
+      object-fit: cover;
+      background: #0d1015;
+    }
+    .shot figcaption {
+      padding: 10px 12px 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      border-top: 1px solid var(--line);
+      margin-top: 26px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1 class="logo">Timer<span class="iq">IQ</span></h1>
+      <p class="tagline">
+        A focused iPhone interval timer for training sessions. Configure your workout, launch with one tap, and stay on pace with clear visual, audio, and optional voice cues.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#screenshots">View Screenshots</a>
+        <a class="btn" href="#features">Explore Features</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="features">
+      <h2>Built for Fast, Reliable Workouts</h2>
+      <p class="lead">
+        TimerIQ covers the full workout flow: pick a mode, tune your timing, start quickly, then run your session with pause, skip, and reset controls.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Mode-Specific Setup</h3>
+          <p>Each workout mode gets the right controls: wheel pickers, steppers, interval add/remove actions, and dynamic timer options for that format.</p>
+        </article>
+        <article class="card">
+          <h3>Session Controls in Real Time</h3>
+          <p>Start or pause any session instantly, then skip or reset without leaving the timer view.</p>
+        </article>
+        <article class="card">
+          <h3>Audio + Voice Cueing</h3>
+          <p>Get countdown and start sounds, plus optional voice alerts for 3-2-1 and work/rest transitions.</p>
+        </article>
+        <article class="card">
+          <h3>Countdown + Cue Preferences</h3>
+          <p>Configure default countdown length, choose cue sounds, and toggle audible cues or voice alerts in Settings.</p>
+        </article>
+        <article class="card">
+          <h3>Saved Mode Selections</h3>
+          <p>Timer selections are persisted by mode so your last setup is ready the next time you train.</p>
+        </article>
+        <article class="card">
+          <h3>On-Device Data Handling</h3>
+          <p>Your timer presets and settings are stored locally on device for a private, no-account workflow.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="modes">
+      <h2>All Workout Modes Included</h2>
+      <p class="lead">Switch quickly between common training structures with dedicated setup screens for each one.</p>
+      <div class="modes">
+        <article class="mode amrap">
+          <h3>AMRAP</h3>
+          <p>As many rounds as possible. Configure one or multiple intervals and optional rest between intervals.</p>
+        </article>
+        <article class="mode emom">
+          <h3>EMOM</h3>
+          <p>Every minute on the minute. Set both interval frequency and total session duration.</p>
+        </article>
+        <article class="mode fortime">
+          <h3>FOR TIME</h3>
+          <p>Finish as fast as possible before your selected time cap.</p>
+        </article>
+        <article class="mode tabata">
+          <h3>TABATA</h3>
+          <p>Alternating high-intensity work and rest with configurable rounds, work time, and rest time.</p>
+        </article>
+        <article class="mode custom">
+          <h3>CUSTOM</h3>
+          <p>Build your own work/rest structure with editable intervals and rounds.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <h2>App Screenshots</h2>
+      <p class="lead">A quick look at the live app flow across home, mode setup, and settings.</p>
+      <div class="shots">
+        <figure class="shot">
+          <img src="assets/screenshots/home.png" alt="TimerIQ home screen showing workout mode buttons">
+          <figcaption>Home screen with one-tap mode selection.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/amrap.png" alt="AMRAP setup screen with interval configuration">
+          <figcaption>AMRAP setup with interval and rest configuration.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/emom.png" alt="EMOM setup screen with Every and For pickers">
+          <figcaption>EMOM setup with “Every” and “For” controls.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/tabata.png" alt="Tabata setup screen with rounds, work, and rest controls">
+          <figcaption>Tabata setup for rounds, work, and rest.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/settings.png" alt="Settings screen with defaults, audio, and app info">
+          <figcaption>Settings for countdown, cues, voice alerts, and app info.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <strong>TimerIQ</strong><br>
+      Smart interval timing for iOS workouts.
+      <div class="footer-links">
+        <a href="PRIVACY.md">Privacy Policy</a>
+        <a href="SUPPORT.md">Support</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
