@@ -1,469 +1,299 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StrengthIQ | Native iOS Strength Log</title>
-  <meta name="description" content="StrengthIQ is a native iOS strength-training log with eight fixed exercises, NSCA-informed 1RM tools, pull-up tracking, and private on-device data storage.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TimerIQ - Smart Interval Timer for iPhone</title>
+  <meta name="description" content="TimerIQ is a powerful iOS interval timer with AMRAP, EMOM, For Time, Tabata, and Custom modes, plus audio and voice cues.">
   <style>
     :root {
-      --bg: #0c0f14;
-      --panel: #121722;
-      --panel-2: #171d2b;
-      --text: #e8edf7;
-      --muted: #a6b1c5;
-      --line: #2a3246;
-      --brand: #63a1ff;
-      --brand-2: #6ce6c6;
-      --accent: #f7b267;
-      --ok: #8ae28d;
-      --danger: #ff8a8a;
-      --radius: 14px;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --bg: #050608;
+      --card: #121419;
+      --text: #f4f7fb;
+      --muted: #a7b0bf;
+      --line: #232833;
+      --brand: #20a5ff;
+      --amrap: #f26b3f;
+      --emom: #a248eb;
+      --fortime: #4280ef;
+      --tabata: #1fc7ac;
+      --custom: #586074;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at 20% -10%, #1f2a44 0%, var(--bg) 45%) fixed;
+      background: radial-gradient(circle at top, #11131a 0%, var(--bg) 35%, var(--bg) 100%);
       color: var(--text);
       line-height: 1.5;
     }
 
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
     .container {
-      width: min(1100px, 92vw);
+      width: min(1120px, 92vw);
       margin: 0 auto;
     }
 
-    header {
+    .hero {
       padding: 72px 0 40px;
+      text-align: center;
+    }
+    .logo {
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+    .logo .iq { color: var(--brand); }
+    .tagline {
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      max-width: 760px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #171a22;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .btn.primary {
+      background: linear-gradient(180deg, #2cb1ff, #0f8fe5);
+      border-color: #118ad8;
+      color: white;
     }
 
-    .hero {
+    section { padding: 30px 0; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 3.4vw, 2rem);
+    }
+    .lead {
+      color: var(--muted);
+      margin: 0 0 20px;
+      max-width: 920px;
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
-      align-items: stretch;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
     }
 
     .card {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      background: linear-gradient(180deg, #171b25, #131720);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border-radius: 18px;
+      padding: 16px;
     }
-
-    .hero-copy {
-      padding: 34px;
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
     }
-
-    .badge {
-      display: inline-block;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--brand-2);
-      border: 1px solid #2a5f55;
-      border-radius: 999px;
-      padding: 6px 10px;
-      margin-bottom: 14px;
-      background: rgba(108, 230, 198, 0.08);
-    }
-
-    h1, h2, h3 {
-      margin-top: 0;
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 12px;
-    }
-
-    p {
-      margin-top: 0;
+    .card p {
+      margin: 0;
       color: var(--muted);
+      font-size: 0.96rem;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      border-radius: 10px;
-      padding: 11px 14px;
-      font-size: 14px;
-      text-decoration: none;
-      border: 1px solid transparent;
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--brand), #86b8ff);
-      color: #0a1120;
-    }
-
-    .btn-secondary {
-      border-color: #3a4865;
-      color: var(--text);
-      background: #12192a;
-    }
-
-    .hero-facts {
-      padding: 22px;
+    .modes {
       display: grid;
-      gap: 10px;
+      gap: 12px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
-
-    .fact {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px;
-      background: rgba(9, 13, 20, 0.35);
+    @media (max-width: 960px) {
+      .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-
-    .fact strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 4px;
+    @media (max-width: 560px) {
+      .modes { grid-template-columns: 1fr; }
     }
-
-    main section {
-      margin: 26px 0;
-      padding: 26px;
+    .mode {
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 14px;
+      min-height: 150px;
     }
+    .mode h3 { margin: 0 0 8px; font-size: 1rem; }
+    .mode p { margin: 0; font-size: 0.93rem; color: rgba(255,255,255,0.92); }
+    .amrap { background: linear-gradient(180deg, #f57a52, var(--amrap)); }
+    .emom { background: linear-gradient(180deg, #b45cff, var(--emom)); }
+    .fortime { background: linear-gradient(180deg, #5d95fb, var(--fortime)); }
+    .tabata { background: linear-gradient(180deg, #39dbc2, var(--tabata)); }
+    .custom { background: linear-gradient(180deg, #6d778f, var(--custom)); }
 
-    .grid-2 {
+    .shots {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .shots-intro {
-      margin-bottom: 14px;
-    }
-
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
-
-    .shot {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(10, 15, 25, 0.8);
-      padding: 10px;
+    @media (max-width: 960px) {
+      .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-
+    @media (max-width: 560px) {
+      .shots { grid-template-columns: 1fr; }
+    }
+    .shot {
+      background: #0f1218;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
     .shot img {
       width: 100%;
-      height: auto;
       display: block;
-      border-radius: 10px;
-      border: 1px solid #34405a;
-      background: #070a10;
+      aspect-ratio: 9 / 19.5;
+      object-fit: cover;
+      background: #0d1015;
     }
-
     .shot figcaption {
-      margin-top: 8px;
+      padding: 10px 12px 12px;
       color: var(--muted);
-      font-size: 13px;
-      text-align: center;
+      font-size: 0.9rem;
     }
 
-    .list {
-      margin: 0;
-      padding-left: 20px;
+    .footer {
+      padding: 40px 0 60px;
       color: var(--muted);
+      font-size: 0.92rem;
+      border-top: 1px solid var(--line);
+      margin-top: 26px;
     }
-
-    .list li {
-      margin-bottom: 8px;
-    }
-
-    .pill-row {
+    .footer-links {
       display: flex;
+      gap: 14px;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .pill {
-      font-size: 12px;
-      padding: 7px 10px;
-      border: 1px solid #374464;
-      border-radius: 999px;
-      color: #d7def0;
-      background: rgba(48, 66, 101, 0.32);
-    }
-
-    .steps {
-      counter-reset: flow;
-      display: grid;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .steps li {
-      border: 1px solid var(--line);
-      background: rgba(16, 23, 36, 0.9);
-      border-radius: 10px;
-      padding: 12px 12px 12px 46px;
-      position: relative;
-      color: var(--muted);
-    }
-
-    .steps li::before {
-      counter-increment: flow;
-      content: counter(flow);
-      position: absolute;
-      left: 12px;
-      top: 10px;
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: #22314f;
-      color: #cfe0ff;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    .note {
-      border-left: 3px solid var(--accent);
-      padding-left: 12px;
-      color: #f4d7b3;
-    }
-
-    .ok {
-      border-left-color: var(--ok);
-      color: #c6f0c8;
-    }
-
-    footer {
-      margin: 32px 0 40px;
-      color: #8f9bb1;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    a {
-      color: #aaccff;
-    }
-
-    @media (max-width: 900px) {
-      .hero,
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-
-      .screenshots-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 560px) {
-      .screenshots-grid {
-        grid-template-columns: 1fr;
-      }
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
-  <header class="container">
-    <div class="hero">
-      <section class="card hero-copy">
-        <span class="badge">Native iOS strength log</span>
-        <h1>Train smarter with StrengthIQ</h1>
-        <p>
-          StrengthIQ is a focused, private strength-training log for iPhone. Track your core lifts,
-          monitor progress over time, and use NSCA-informed tools to guide your loading without
-          sending your workout data to the cloud.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#features">Explore features</a>
-          <a class="btn btn-secondary" href="#privacy">View privacy details</a>
-        </div>
-      </section>
-      <aside class="card hero-facts" aria-label="StrengthIQ key facts">
-        <div class="fact">
-          <strong>Platform</strong>
-          iPhone app (iOS 17+), portrait orientation.
-        </div>
-        <div class="fact">
-          <strong>Storage</strong>
-          SwiftData local persistence. No accounts and no cloud sync in v1.
-        </div>
-        <div class="fact">
-          <strong>Exercises</strong>
-          8 fixed seeded movements with dedicated tracking behavior.
-        </div>
-        <div class="fact">
-          <strong>Companion design</strong>
-          Built to match the IntervalIQ app's dark visual language and flow.
-        </div>
-      </aside>
+  <header class="hero">
+    <div class="container">
+      <h1 class="logo">Timer<span class="iq">IQ</span></h1>
+      <p class="tagline">
+        A focused iPhone interval timer for training sessions. Configure your workout, launch with one tap, and stay on pace with clear visual, audio, and optional voice cues.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#screenshots">View Screenshots</a>
+        <a class="btn" href="#features">Explore Features</a>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="card">
-      <h2>See the app in action</h2>
-      <p class="shots-intro">
-        StrengthIQ keeps the interface fast and focused, from the exercise picker to 1RM tools and set logging.
+    <section id="features">
+      <h2>Built for Fast, Reliable Workouts</h2>
+      <p class="lead">
+        TimerIQ covers the full workout flow: pick a mode, tune your timing, start quickly, then run your session with pause, skip, and reset controls.
       </p>
-      <div class="screenshots-grid">
-        <figure class="shot">
-          <img src="assets/screenshots/home.png" alt="StrengthIQ home screen showing exercise buttons">
-          <figcaption>Home exercise picker</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/screenshots/settings.png" alt="Settings screen with 1RM management and NSCA reference table">
-          <figcaption>Settings and references</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/screenshots/one-rm.png" alt="1RM management screen with estimated vs manual values">
-          <figcaption>1RM management</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/screenshots/log-set.png" alt="Log set screen for bench press with input fields">
-          <figcaption>Per-lift logging workflow</figcaption>
-        </figure>
+      <div class="grid">
+        <article class="card">
+          <h3>Mode-Specific Setup</h3>
+          <p>Each workout mode gets the right controls: wheel pickers, steppers, interval add/remove actions, and dynamic timer options for that format.</p>
+        </article>
+        <article class="card">
+          <h3>Session Controls in Real Time</h3>
+          <p>Start or pause any session instantly, then skip or reset without leaving the timer view.</p>
+        </article>
+        <article class="card">
+          <h3>Audio + Voice Cueing</h3>
+          <p>Get countdown and start sounds, plus optional voice alerts for 3-2-1 and work/rest transitions.</p>
+        </article>
+        <article class="card">
+          <h3>Countdown + Cue Preferences</h3>
+          <p>Configure default countdown length, choose cue sounds, and toggle audible cues or voice alerts in Settings.</p>
+        </article>
+        <article class="card">
+          <h3>Saved Mode Selections</h3>
+          <p>Timer selections are persisted by mode so your last setup is ready the next time you train.</p>
+        </article>
+        <article class="card">
+          <h3>On-Device Data Handling</h3>
+          <p>Your timer presets and settings are stored locally on device for a private, no-account workflow.</p>
+        </article>
       </div>
     </section>
 
-    <section id="features" class="card">
-      <h2>Everything StrengthIQ includes</h2>
-      <div class="grid-2">
-        <div>
-          <h3>Exercise system</h3>
-          <ul class="list">
-            <li>Eight fixed exercises: deadlift, bench, squat, row, hip thrust, pull-up, clean, overhead press.</li>
-            <li>Distinct accent color per exercise for fast visual recognition.</li>
-            <li>Automatic migration of legacy labels from older app builds where applicable.</li>
-          </ul>
-          <div class="pill-row" aria-label="Exercise list">
-            <span class="pill">Deadlift</span>
-            <span class="pill">Bench</span>
-            <span class="pill">Squat</span>
-            <span class="pill">Row</span>
-            <span class="pill">Hip Thrust</span>
-            <span class="pill">Pull-up</span>
-            <span class="pill">Clean</span>
-            <span class="pill">Overhead Press</span>
-          </div>
-        </div>
-        <div>
-          <h3>Barbell logging capabilities</h3>
-          <ul class="list">
-            <li>Track weight (lb), reps, and optional percent of 1RM.</li>
-            <li>Remembered lift-type menus by exercise for cleaner repeated logging.</li>
-            <li>Optional set-style controls where relevant by movement.</li>
-            <li>NSCA-style suggested load from % of 1RM with 5 lb rounding and manual override.</li>
-            <li>Estimated 1RM from logged sets based on NSCA chart logic, rounded to nearest 5 lb.</li>
-            <li>Session 1RM is created from the first set and can rise if later sets imply a higher e1RM.</li>
-          </ul>
-        </div>
+    <section id="modes">
+      <h2>All Workout Modes Included</h2>
+      <p class="lead">Switch quickly between common training structures with dedicated setup screens for each one.</p>
+      <div class="modes">
+        <article class="mode amrap">
+          <h3>AMRAP</h3>
+          <p>As many rounds as possible. Configure one or multiple intervals and optional rest between intervals.</p>
+        </article>
+        <article class="mode emom">
+          <h3>EMOM</h3>
+          <p>Every minute on the minute. Set both interval frequency and total session duration.</p>
+        </article>
+        <article class="mode fortime">
+          <h3>FOR TIME</h3>
+          <p>Finish as fast as possible before your selected time cap.</p>
+        </article>
+        <article class="mode tabata">
+          <h3>TABATA</h3>
+          <p>Alternating high-intensity work and rest with configurable rounds, work time, and rest time.</p>
+        </article>
+        <article class="mode custom">
+          <h3>CUSTOM</h3>
+          <p>Build your own work/rest structure with editable intervals and rounds.</p>
+        </article>
       </div>
     </section>
 
-    <section class="card">
-      <div class="grid-2">
-        <div>
-          <h3>Pull-up specific tracking</h3>
-          <ul class="list">
-            <li>No 1RM or NSCA percentage UI to keep pull-up workflows focused.</li>
-            <li>Log reps over time with timestamped history rows.</li>
-            <li>Capture variant and eccentric emphasis per set.</li>
-            <li>Track added weight for weighted pull-up sessions.</li>
-          </ul>
-          <div class="pill-row" aria-label="Pull-up variants">
-            <span class="pill">Standard/Strict</span>
-            <span class="pill">Chin-up</span>
-            <span class="pill">Wide</span>
-            <span class="pill">Close</span>
-            <span class="pill">Commando</span>
-            <span class="pill">Weighted</span>
-            <span class="pill">Chest-to-bar</span>
-          </div>
-        </div>
-        <div>
-          <h3>Settings and progression tools</h3>
-          <ul class="list">
-            <li>Manual 1RM overrides for 1RM-tracked lifts (pull-up excluded).</li>
-            <li>Saved 1RM values are normalized to nearest 5 lb for consistency.</li>
-            <li>Integrated NSCA reference table from Settings.</li>
-            <li>History views for each exercise to review progression chronologically.</li>
-          </ul>
-        </div>
+    <section id="screenshots">
+      <h2>App Screenshots</h2>
+      <p class="lead">A quick look at the live app flow across home, mode setup, and settings.</p>
+      <div class="shots">
+        <figure class="shot">
+          <img src="assets/screenshots/home.png" alt="TimerIQ home screen showing workout mode buttons">
+          <figcaption>Home screen with one-tap mode selection.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/amrap.png" alt="AMRAP setup screen with interval configuration">
+          <figcaption>AMRAP setup with interval and rest configuration.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/emom.png" alt="EMOM setup screen with Every and For pickers">
+          <figcaption>EMOM setup with “Every” and “For” controls.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/tabata.png" alt="Tabata setup screen with rounds, work, and rest controls">
+          <figcaption>Tabata setup for rounds, work, and rest.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/settings.png" alt="Settings screen with defaults, audio, and app info">
+          <figcaption>Settings for countdown, cues, voice alerts, and app info.</figcaption>
+        </figure>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>Simple flow, fast logging</h2>
-      <ol class="steps">
-        <li><strong>Home:</strong> pick an exercise from capsule buttons, then jump into logging.</li>
-        <li><strong>Log Set:</strong> enter reps, load, and movement-specific fields with remembered options.</li>
-        <li><strong>History:</strong> open per-exercise chronological logs anytime from the navigation bar.</li>
-        <li><strong>Settings:</strong> manage manual 1RM values and open NSCA references.</li>
-      </ol>
-      <p class="note">
-        The UI structure mirrors IntervalIQ navigation and styling patterns for consistent training-app ergonomics.
-      </p>
-    </section>
-
-    <section id="privacy" class="card">
-      <h2>Privacy-first by design</h2>
-      <div class="grid-2">
-        <div>
-          <ul class="list">
-            <li>Workout data is stored only on your iPhone.</li>
-            <li>No app-operated cloud storage in the current release.</li>
-            <li>No selling, renting, licensing, or advertising use of your workout logs.</li>
-            <li>No third-party analytics or ad SDK integration in this release.</li>
-            <li>Data can be retained via your own Apple backup settings, not through app servers.</li>
-          </ul>
-        </div>
-        <div>
-          <p class="note ok">
-            StrengthIQ is built for straightforward personal tracking: local storage, transparent data handling,
-            and no account setup required.
-          </p>
-          <p>
-            Full policy and contact details are available in
-            <a href="PRIVACY.md">PRIVACY.md</a>.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Built for modern iOS</h2>
-      <ul class="list">
-        <li>Native SwiftUI interface for iPhone.</li>
-        <li>SwiftData persistence for on-device reliability.</li>
-        <li>Designed for Xcode 15+ development workflow and iOS 17 deployment target.</li>
-        <li>App identity: StrengthIQ (`com.strengthiq.StrengthIQ`).</li>
-      </ul>
     </section>
   </main>
 
-  <footer class="container">
-    StrengthIQ &middot; Native iOS strength-training log &middot;
-    <a href="README.md">Project README</a> &middot;
-    <a href="PRIVACY.md">Privacy Policy</a>
+  <footer class="footer">
+    <div class="container">
+      <strong>TimerIQ</strong><br>
+      Smart interval timing for iOS workouts.
+      <div class="footer-links">
+        <a href="PRIVACY.md">Privacy Policy</a>
+        <a href="SUPPORT.md">Support</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
