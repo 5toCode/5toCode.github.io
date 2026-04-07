@@ -1,4 +1,4 @@
-# TimerIQ Privacy Policy
+# TrainIQ Privacy Policy
 
 Last updated: April 7, 2026
 
