@@ -50,27 +50,22 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   /*
    * Images inside article markdown.
    * Astro scopes <style> blocks, so we use :global() to reach slotted content.
+   *
+   * NOTE: Astro rewrites src to /_astro/filename.HASH.webp for optimized images,
+   * so path-based attribute selectors (img[src*="screenshots"]) don't work.
+   * Instead we use max-height to constrain portrait images naturally:
+   *   - Portrait phone screenshot (1320×2868): scales to ~299×650 px → phone scale ✓
+   *   - Landscape screenshot (e.g. 1200×800): scales to 720×480 px → full column ✓
    */
-
-  /* All images: centered block with a subtle shadow and rounded corners */
   article :global(img) {
     display: block;
     max-width: 100%;
+    max-height: 650px;
+    width: auto;
     height: auto;
     margin: 2.5em auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-  }
-
-  /*
-   * Phone screenshots (paths containing /assets/screenshots/).
-   * Portrait screenshots are very tall at full column width — cap them at a
-   * phone-like display width so they read as device previews, not full-bleed images.
-   */
-  article :global(img[src*="screenshots"]) {
-    max-width: 260px;
-    border-radius: 20px; /* matches a phone bezel feel */
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
   }
 
   /* Strong text — match the site's bold weight */
