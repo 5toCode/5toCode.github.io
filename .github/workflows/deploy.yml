@@ -16,6 +16,11 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# Use Node.js 24 for all GitHub-provided JavaScript actions.
+# Required as of June 2026 when Node.js 20 is no longer the default runner.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     name: Build
@@ -27,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
