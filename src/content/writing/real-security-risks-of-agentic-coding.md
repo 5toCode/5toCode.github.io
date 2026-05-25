@@ -18,7 +18,7 @@ One of the things I enjoy most about this industry is that it forces you to cons
 
 My first app, TrainIQ, came out of frustration with a free interval timer I'd been using to time my workouts. Every time I started a timer, an ad popped up. The app's real purpose wasn't to time workouts — it was to serve ads. So with the help of Cursor, I built my own: focused, privacy-first, no ads, no tracking. From initial plan to working prototype took about half a day.
 
-![TrainIQ — a focused, privacy-first interval timer with no ads and no tracking.](../../assets/writing/trainiq-home.png)
+![TrainIQ — a focused, privacy-first interval timer with no ads and no tracking.](/TrainIQ/assets/screenshots/home.png)
 
 I later built a second app, StrengthIQ, a strength training log that takes the same privacy-first approach — all workout data stays on the device, with nothing sent to the cloud.
 
@@ -26,7 +26,7 @@ That's when I started noticing some interesting — and concerning — patterns.
 
 **Pattern 1 — Cloud sprawl by default.** AI coding assistants are trained on Stack Overflow and GitHub, where the dominant pattern is "store everything in the cloud." When you ask one to build a feature, it will reach for cloud storage, third-party APIs, and analytics SDKs without being asked. For a privacy-first app like StrengthIQ, this meant constantly redirecting the AI back to on-device storage. The lesson isn't that the AI is wrong — it's that *secure defaults are not free*. Someone has to know what the default should be.
 
-![StrengthIQ — a strength training log designed so that workout data never leaves the device.](../../assets/writing/strengthiq-home.png)
+![StrengthIQ — a strength training log designed so that workout data never leaves the device.](/StrengthIQ/assets/screenshots/home.png)
 
 **Pattern 2 — The "looks right" failure mode.** Code that *runs* is not the same as code that's *secure*. AI-generated code has a particular failure mode: it's syntactically accurate, well-commented, and follows the surface conventions of the language, which makes it look reviewed. But the security properties are inconsistent. I've watched coding assistants hardcode API keys directly into source files, write error messages that leak implementation details back to the user, and skip input validation on fields a user could easily manipulate. None of these would have failed a build. All of them would have failed a real code review.
 
