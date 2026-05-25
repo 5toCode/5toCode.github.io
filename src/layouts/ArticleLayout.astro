@@ -45,3 +45,44 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     </article>
   </div>
 </BaseLayout>
+
+<style>
+  /*
+   * Images inside article markdown.
+   * Astro scopes <style> blocks, so we use :global() to reach slotted content.
+   */
+
+  /* All images: centered block with a subtle shadow and rounded corners */
+  article :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2.5em auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  /*
+   * Phone screenshots (paths containing /assets/screenshots/).
+   * Portrait screenshots are very tall at full column width — cap them at a
+   * phone-like display width so they read as device previews, not full-bleed images.
+   */
+  article :global(img[src*="screenshots"]) {
+    max-width: 260px;
+    border-radius: 20px; /* matches a phone bezel feel */
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+  }
+
+  /* Strong text — match the site's bold weight */
+  article :global(strong) {
+    font-weight: 900;
+    color: #303030;
+  }
+
+  /* Horizontal rules */
+  article :global(hr) {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2.5em 0;
+  }
+</style>
