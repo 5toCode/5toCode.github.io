@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Writing | Mike Roberts"
+  description="Articles on web development, iOS apps, and building software."
+  fonts={true}
+  icons={true}
+>
+  <SiteHeader />
+
+  <main class="writing-index">
+    <div class="writing-inner">
+      <h1 class="writing-heading">Writing</h1>
+      <p class="writing-sub">Notes on web development, iOS apps, and building things.</p>
+
+      {posts.length === 0 && (
+        <p class="empty">No articles yet — check back soon.</p>
+      )}
+
+      <ol class="post-list">
+        {posts.map(post => {
+          const date = post.data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric',
+          });
+          return (
+            <li class="post-item">
+              <a href={`/writing/${post.id}/`} class="post-link">
+                <time class="post-date" datetime={post.data.pubDate.toISOString()}>
+                  {date}
+                </time>
+                <h2 class="post-title">{post.data.title}</h2>
+                <p class="post-desc">{post.data.description}</p>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+
+      <p class="rss-note">
+        <a href="/rss.xml" class="rss-link">RSS feed</a>
+      </p>
+    </div>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .writing-index {
+    padding: 5em 2em;
+    min-height: 60vh;
+  }
+
+  .writing-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .writing-heading {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0 0 0.25em;
+    color: #303030;
+  }
+
+  @media (min-width: 800px) {
+    .writing-heading { font-size: 4.5rem; }
+  }
+
+  .writing-sub {
+    font-size: 1.125rem;
+    color: #666;
+    margin: 0 0 3em;
+    font-family: 'Source Code Pro', monospace;
+  }
+
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+
+  .post-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 2em;
+  }
+
+  .post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .post-link:hover .post-title {
+    color: #2b70e4;
+  }
+
+  .post-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    font-family: 'Source Code Pro', monospace;
+    margin-bottom: 0.4em;
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 0 0 0.4em;
+    color: #303030;
+    transition: color 200ms;
+  }
+
+  .post-desc {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .empty {
+    color: #888;
+    font-style: italic;
+  }
+
+  .rss-note {
+    margin-top: 3em;
+    font-size: 0.9rem;
+    color: #888;
+  }
+
+  .rss-link {
+    color: #2b70e4;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .rss-link:hover {
+    text-decoration: underline;
+  }
+</style>
