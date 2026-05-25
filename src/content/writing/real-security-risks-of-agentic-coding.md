@@ -5,8 +5,9 @@ pubDate: 2026-05-25
 tags:
   - AI
   - Security
-  - Cloud_Security
-  - AI_Coding
+  - Cloud-Security
+  - AI-Coding
+  - Claude-Code
 ---
 A few hours into building my first iOS app, my AI coding assistant suggested I store user data in a cloud database I hadn't asked for, didn't need, and would have created a privacy mess. The code worked, but the architecture was wrong. I'd been a cloud security professional for two decades, and I almost just went along with it.
 
