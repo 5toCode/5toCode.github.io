@@ -1,13 +1,14 @@
 ---
-// Static nav links. Add items here to update both nav and mobile overlay.
+// Updated nav links — matches SiteHeader.astro
 const links = [
-  { href: '#about',    label: 'About' },
-  { href: '#apps',     label: 'Apps' },
-  { href: '/writing/', label: 'Writing' },
+  { href: '#who-i-am',     label: 'Who I Am' },
+  { href: '#what-i-build', label: 'What I Build' },
+  { href: '/writing/',     label: 'Writing' },
+  { href: '#contact',      label: 'Contact' },
 ];
 ---
 
-<nav class="nav">
+<nav class="nav" aria-label="Main navigation">
   <ul class="nav__list">
     {links.map(({ href, label }) => (
       <li class="nav__item">

@@ -16,47 +16,110 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={`${title} | Mike Roberts`} description={description} fonts={true}>
-  <div class="max-w-[720px] mx-auto px-8 py-20">
-    <a
-      href="/writing/"
-      class="inline-block mb-8 text-sm font-bold uppercase tracking-widest text-[#2b70e4] hover:opacity-70 transition-opacity"
-    >
-      ← All Articles
-    </a>
+<BaseLayout title={`${title} | Mike Roberts`} description={description}>
+  <div class="article-page">
+    <div class="article-wrap">
+      <a href="/writing/" class="back-link">← All Articles</a>
 
-    <header class="mb-10">
-      <time
-        datetime={pubDate.toISOString()}
-        class="block text-sm text-gray-500 mb-3 font-mono"
+      <header class="article-header">
+        <time datetime={pubDate.toISOString()} class="article-date">
+          {formattedDate}
+        </time>
+        <h1 class="article-title">{title}</h1>
+        <p class="article-desc">{description}</p>
+      </header>
+
+      <hr class="article-rule" />
+
+      <article
+        class="prose max-w-none
+          text-[#dde4e0] leading-relaxed
+          [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4
+          [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:text-white [&_h3]:mt-8 [&_h3]:mb-3
+          [&_p]:mb-5 [&_p]:text-[#bacac3]
+          [&_a]:text-[#38debb] [&_a]:underline [&_a]:underline-offset-2 [&_a]:transition-colors hover:[&_a]:text-[#5ffbd6]
+          [&_code]:font-mono [&_code]:bg-[#1a211f] [&_code]:text-[#5ffbd6] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm
+          [&_pre]:bg-[#0e1512] [&_pre]:border [&_pre]:border-[#3c4a45] [&_pre]:text-[#dde4e0] [&_pre]:p-5 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:text-sm
+          [&_pre_code]:bg-transparent [&_pre_code]:text-inherit [&_pre_code]:p-0
+          [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-5 [&_ul]:text-[#bacac3]
+          [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-5 [&_ol]:text-[#bacac3]
+          [&_li]:mb-1.5
+          [&_blockquote]:border-l-4 [&_blockquote]:border-[#38debb] [&_blockquote]:pl-5 [&_blockquote]:italic [&_blockquote]:text-[#bacac3] [&_blockquote]:bg-[#1a211f] [&_blockquote]:py-3 [&_blockquote]:pr-4 [&_blockquote]:rounded-r
+          [&_strong]:text-white [&_strong]:font-semibold
+        "
       >
-        {formattedDate}
-      </time>
-      <h1 class="text-4xl md:text-5xl font-black leading-tight text-[#303030] mb-4">
-        {title}
-      </h1>
-      <p class="text-lg text-gray-600 leading-relaxed">{description}</p>
-    </header>
-
-    <hr class="border-gray-200 mb-10" />
-
-    <article class="prose max-w-none text-[#303030] leading-relaxed [&_h2]:text-3xl [&_h2]:font-black [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:mb-5 [&_a]:text-[#2b70e4] [&_a]:underline [&_code]:font-mono [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_pre]:bg-gray-900 [&_pre]:text-gray-100 [&_pre]:p-5 [&_pre]:rounded [&_pre]:overflow-x-auto [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-5 [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-5 [&_blockquote]:border-l-4 [&_blockquote]:border-[#2b70e4] [&_blockquote]:pl-5 [&_blockquote]:italic [&_blockquote]:text-gray-600">
-      <slot />
-    </article>
+        <slot />
+      </article>
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  /*
-   * Images inside article markdown.
-   * Astro scopes <style> blocks, so we use :global() to reach slotted content.
-   *
-   * NOTE: Astro rewrites src to /_astro/filename.HASH.webp for optimized images,
-   * so path-based attribute selectors (img[src*="screenshots"]) don't work.
-   * Instead we use max-height to constrain portrait images naturally:
-   *   - Portrait phone screenshot (1320×2868): scales to ~299×650 px → phone scale ✓
-   *   - Landscape screenshot (e.g. 1200×800): scales to 720×480 px → full column ✓
-   */
+  .article-page {
+    padding-top: 2.5rem; /* no fixed nav on article pages */
+    padding-bottom: 5rem;
+  }
+
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #38debb;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: #5ffbd6;
+  }
+
+  .article-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .article-date {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    color: #bacac3;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.875rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 0 0 1rem;
+  }
+
+  .article-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    color: #bacac3;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .article-rule {
+    border: none;
+    border-top: 1px solid #3c4a45;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Images inside article markdown */
   article :global(img) {
     display: block;
     max-width: 100%;
@@ -64,20 +127,14 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     width: auto;
     height: auto;
     margin: 2.5em auto;
-    border-radius: 16px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* Strong text — match the site's bold weight */
-  article :global(strong) {
-    font-weight: 900;
-    color: #303030;
-  }
-
-  /* Horizontal rules */
   article :global(hr) {
     border: none;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid #3c4a45;
     margin: 2.5em 0;
   }
 </style>

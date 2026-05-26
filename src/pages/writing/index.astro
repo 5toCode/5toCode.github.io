@@ -11,77 +11,85 @@ const posts = (await getCollection('writing')).sort(
 
 <BaseLayout
   title="Writing | Mike Roberts"
-  description="Articles on web development, iOS apps, and building software."
-  fonts={true}
-  icons={true}
+  description="Notes on AI, security, and building things at the intersection of cloud and code."
 >
-  <SiteHeader />
+  <div class="writing-page">
+    <SiteHeader />
 
-  <main class="writing-index">
-    <div class="writing-inner">
-      <h1 class="writing-heading">Writing</h1>
-      <p class="writing-sub">Notes on web development, iOS apps, and building things.</p>
+    <main class="writing-main">
+      <div class="writing-inner tech-line">
+        <h1 class="writing-heading">Writing</h1>
+        <p class="writing-sub">Notes on AI, security, and building things.</p>
 
-      {posts.length === 0 && (
-        <p class="empty">No articles yet — check back soon.</p>
-      )}
+        {posts.length === 0 && (
+          <p class="empty">No articles yet — check back soon.</p>
+        )}
 
-      <ol class="post-list">
-        {posts.map(post => {
-          const date = post.data.pubDate.toLocaleDateString('en-US', {
-            year: 'numeric', month: 'long', day: 'numeric',
-          });
-          return (
-            <li class="post-item">
-              <a href={`/writing/${post.id}/`} class="post-link">
-                <time class="post-date" datetime={post.data.pubDate.toISOString()}>
-                  {date}
-                </time>
-                <h2 class="post-title">{post.data.title}</h2>
-                <p class="post-desc">{post.data.description}</p>
-              </a>
-            </li>
-          );
-        })}
-      </ol>
+        <ol class="post-list">
+          {posts.map(post => {
+            const date = post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric',
+            });
+            return (
+              <li>
+                <a href={`/writing/${post.id}/`} class="post-link">
+                  <time class="post-date" datetime={post.data.pubDate.toISOString()}>
+                    {date}
+                  </time>
+                  <h2 class="post-title">{post.data.title}</h2>
+                  <p class="post-desc">{post.data.description}</p>
+                  <div class="post-rule" aria-hidden="true"></div>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
 
-      <p class="rss-note">
-        <a href="/rss.xml" class="rss-link">RSS feed</a>
-      </p>
-    </div>
-  </main>
+        <p class="rss-note">
+          <a href="/rss.xml" class="rss-link">RSS feed</a>
+        </p>
+      </div>
+    </main>
 
-  <SiteFooter />
+    <SiteFooter />
+  </div>
 </BaseLayout>
 
 <style>
-  .writing-index {
-    padding: 5em 2em;
-    min-height: 60vh;
+  .writing-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px; /* fixed nav height */
+  }
+
+  .writing-main {
+    flex: 1;
+    padding: 4rem 1.5rem 5rem;
   }
 
   .writing-inner {
     max-width: 720px;
     margin: 0 auto;
+    padding-left: 1.5rem;
   }
 
   .writing-heading {
-    font-size: 3rem;
-    font-weight: 900;
-    line-height: 1;
-    margin: 0 0 0.25em;
-    color: #303030;
-  }
-
-  @media (min-width: 800px) {
-    .writing-heading { font-size: 4.5rem; }
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #fff;
+    margin: 0 0 0.375em;
   }
 
   .writing-sub {
-    font-size: 1.125rem;
-    color: #666;
-    margin: 0 0 3em;
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    color: #bacac3;
+    margin: 0 0 3rem;
   }
 
   .post-list {
@@ -90,65 +98,78 @@ const posts = (await getCollection('writing')).sort(
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 2em;
-  }
-
-  .post-item {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 2em;
   }
 
   .post-link {
+    display: block;
     text-decoration: none;
     color: inherit;
-    display: block;
+    padding: 1.5rem 0;
   }
 
   .post-link:hover .post-title {
-    color: #2b70e4;
+    color: #38debb;
+  }
+
+  .post-link:hover .post-rule {
+    background: rgba(56, 222, 187, 0.25);
   }
 
   .post-date {
     display: block;
-    font-size: 0.85rem;
-    color: #888;
-    font-family: 'Source Code Pro', monospace;
-    margin-bottom: 0.4em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #b9c7e4;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
   }
 
   .post-title {
-    font-size: 1.5rem;
-    font-weight: 900;
-    line-height: 1.2;
-    margin: 0 0 0.4em;
-    color: #303030;
-    transition: color 200ms;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #fff;
+    margin: 0 0 0.5rem;
+    transition: color 0.2s;
   }
 
   .post-desc {
-    margin: 0;
-    color: #555;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9375rem;
+    color: #bacac3;
     line-height: 1.6;
+    margin: 0;
+  }
+
+  .post-rule {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin-top: 1.5rem;
+    transition: background 0.2s;
   }
 
   .empty {
-    color: #888;
+    color: #bacac3;
     font-style: italic;
   }
 
   .rss-note {
-    margin-top: 3em;
-    font-size: 0.9rem;
-    color: #888;
+    margin-top: 3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    color: #bacac3;
   }
 
   .rss-link {
-    color: #2b70e4;
+    color: #38debb;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 500;
+    transition: color 0.2s;
   }
 
   .rss-link:hover {
+    color: #5ffbd6;
     text-decoration: underline;
   }
 </style>

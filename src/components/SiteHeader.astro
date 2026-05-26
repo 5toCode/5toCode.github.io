@@ -1,135 +1,188 @@
 ---
-import SiteNav from './SiteNav.astro';
+const navLinks = [
+  { href: '#who-i-am',     label: 'Who I Am' },
+  { href: '#what-i-build', label: 'What I Build' },
+  { href: '/writing/',     label: 'Writing' },
+  { href: '#contact',      label: 'Contact' },
+];
 ---
 
-<header>
-  <div class="logo">
-    <a href="/"><img src="/img/5toCode.png" alt="5toCode logo" /></a>
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="header-logo" aria-label="Mike Roberts — Home">
+      <img src="/img/logo.png" alt="5toCode" class="logo-img" />
+      <span class="logo-name">MIKE ROBERTS</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {navLinks.map(({ href, label }) => (
+        <a href={href} class="nav-link">{label}</a>
+      ))}
+    </nav>
+
+    <!-- Mobile toggle -->
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="material-symbols-outlined toggle-icon">menu</span>
+    </button>
   </div>
-  <button class="nav-toggle" aria-label="toggle navigation">
-    <span class="hamburger"></span>
-  </button>
-  <SiteNav />
+
+  <!-- Mobile overlay -->
+  <div class="mobile-nav" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      {navLinks.map(({ href, label }) => (
+        <a href={href} class="mobile-nav__link">{label}</a>
+      ))}
+    </nav>
+  </div>
 </header>
 
 <style is:global>
-  /* Header layout */
-  header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-  }
-
-  .logo {
-    max-width: 150px;
-    position: relative;
-    right: 0.5em;
-    bottom: 1.25em;
-  }
-
-  /* Full-screen overlay nav */
-  .nav {
+  /* ── Fixed glass nav ─────────────────────────────────────────────── */
+  .site-header {
     position: fixed;
-    background: #303030;
-    color: #fff;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    transform: translateX(100%);
-    transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
+    background: rgba(10, 25, 47, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .nav__list {
-    list-style: none;
+  .header-inner {
+    height: 80px;
     display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
   }
 
-  .nav__link {
-    color: inherit;
-    font-weight: 900;
-    font-size: 2.25rem;
+  /* ── Logo ────────────────────────────────────────────────────────── */
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     text-decoration: none;
   }
 
-  @media (min-width: 800px) {
-    .nav__link { font-size: 3.75rem; }
+  .logo-img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 2px;
+    object-fit: cover;
   }
 
-  .nav__link:hover {
-    color: #2b70e4;
+  .logo-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffffff;
   }
 
-  /* Hamburger button */
+  /* ── Desktop nav ─────────────────────────────────────────────────── */
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bacac3;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  /* ── Mobile toggle ───────────────────────────────────────────────── */
   .nav-toggle {
-    padding: 0.5em;
     background: transparent;
-    border: 0;
+    border: none;
     cursor: pointer;
-    position: absolute;
-    right: 1em;
-    top: 1em;
-    z-index: 1000;
+    color: #dde4e0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
   }
 
-  .hamburger {
-    display: block;
-    position: relative;
+  .toggle-icon {
+    font-size: 1.5rem;
   }
 
-  .hamburger,
-  .hamburger::before,
-  .hamburger::after {
-    background: #2b70e4;
-    width: 2em;
-    height: 3px;
-    border-radius: 1em;
-    transition: transform 250ms ease-in-out;
+  /* ── Mobile overlay nav ──────────────────────────────────────────── */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(2, 12, 27, 0.97);
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .hamburger::before,
-  .hamburger::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
+  .mobile-nav.is-open {
+    display: flex;
   }
 
-  .hamburger::before { top: 6px; }
-  .hamburger::after  { bottom: 6px; }
-
-  /* Open state — toggled on <body> by JS */
-  .nav-open .nav         { transform: translateX(0); }
-  .nav-open .nav-toggle  { position: fixed; }
-  .nav-open .hamburger   { transform: rotate(0.625turn); }
-
-  .nav-open .hamburger::before {
-    transform: rotate(90deg) translateX(-6px);
+  .mobile-nav__link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #dde4e0;
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: color 0.2s;
   }
 
-  .nav-open .hamburger::after {
-    opacity: 0;
+  .mobile-nav__link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav__link:hover {
+    color: #38debb;
+  }
+
+  /* ── Responsive breakpoint ───────────────────────────────────────── */
+  @media (min-width: 768px) {
+    .desktop-nav { display: flex; }
+    .nav-toggle  { display: none; }
   }
 </style>
 
 <script>
-  const toggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelectorAll('.nav__link');
+  const toggle   = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const mobileNav = document.querySelector<HTMLElement>('.mobile-nav');
+  const icon      = toggle?.querySelector<HTMLElement>('.toggle-icon');
 
   toggle?.addEventListener('click', () => {
-    document.body.classList.toggle('nav-open');
+    const isOpen = mobileNav?.classList.toggle('is-open') ?? false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    mobileNav?.setAttribute('aria-hidden', String(!isOpen));
+    if (icon) icon.textContent = isOpen ? 'close' : 'menu';
   });
 
-  navLinks.forEach(link => {
+  document.querySelectorAll('.mobile-nav__link').forEach(link => {
     link.addEventListener('click', () => {
-      document.body.classList.remove('nav-open');
+      mobileNav?.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      mobileNav?.setAttribute('aria-hidden', 'true');
+      if (icon) icon.textContent = 'menu';
     });
   });
 </script>

@@ -6,64 +6,109 @@ const socials = [
 ];
 ---
 
-<footer class="footer">
-  <a href="mailto:mike@5tocode.dev" class="footer__link">mike@5tocode.dev</a>
-  <ul class="social-list">
-    {socials.map(({ href, icon, label }) => (
-      <li class="social-list__item">
-        <a href={href} class="social-list__link" aria-label={label}>
+<footer class="site-footer" id="contact">
+  <div class="footer-inner">
+    <!-- Email -->
+    <a href="mailto:mike@5tocode.dev" class="footer-email">mike@5tocode.dev</a>
+
+    <!-- Social links -->
+    <div class="footer-socials">
+      {socials.map(({ href, icon, label }) => (
+        <a href={href} class="social-link" aria-label={label} target="_blank" rel="noopener noreferrer">
           <i class={icon}></i>
+          <span class="social-label">{label}</span>
         </a>
-      </li>
-    ))}
-  </ul>
+      ))}
+    </div>
+
+    <!-- Copyright -->
+    <p class="footer-copy">© 2026 MIKE ROBERTS. SECURING THE FUTURE OF AI.</p>
+  </div>
 </footer>
 
 <style>
-  .footer {
-    background: #111;
-    color: #2b70e4;
-    text-align: center;
-    padding: 2.5em 0;
-    font-size: 1.25rem;
+  .site-footer {
+    background: #020c1b;
+    border-top: 1px solid #3c4a45;
+    padding: 3rem 1.5rem;
+    margin-top: auto;
   }
 
-  @media (min-width: 800px) {
-    .footer { font-size: 1.5rem; }
-  }
-
-  .footer a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .footer__link {
-    font-weight: 900;
-    transition: all 200ms;
-  }
-
-  .footer__link:hover,
-  .social-list__link:hover {
-    opacity: 0.7;
-  }
-
-  .footer__link:hover {
-    text-decoration: underline;
-  }
-
-  .social-list {
-    list-style: none;
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
-    margin: 2em 0 0;
-    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
   }
 
-  .social-list__item {
-    margin: 0 0.5em;
+  @media (min-width: 768px) {
+    .footer-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
   }
 
-  .social-list__link {
-    padding: 0.5em;
+  .footer-email {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: #38debb;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+
+  .footer-email:hover {
+    color: #5ffbd6;
+  }
+
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #bacac3;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    transition: color 0.2s, opacity 0.2s;
+  }
+
+  .social-link:hover {
+    color: #5ffbd6;
+    opacity: 1;
+  }
+
+  .social-link i {
+    font-size: 1rem;
+  }
+
+  .social-label {
+    display: none;
+  }
+
+  @media (min-width: 480px) {
+    .social-label { display: inline; }
+  }
+
+  .footer-copy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: #38debb;
+    opacity: 0.6;
+    margin: 0;
   }
 </style>

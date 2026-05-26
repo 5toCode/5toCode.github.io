@@ -4,15 +4,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  fonts?: boolean;
-  icons?: boolean;
+  fonts?: boolean;  // kept for backward compat; fonts always load now
+  icons?: boolean;  // kept for backward compat; icons always load now
 }
 
 const {
   title,
   description = 'Mike Roberts — Engineering Manager, Cloud Security at Google. Builder of AI-assisted iOS apps. Writing about AI and cybersecurity.',
-  fonts = false,
-  icons = false,
 } = Astro.props;
 ---
 
@@ -25,22 +23,26 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    {fonts && (
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;900&family=Source+Sans+Pro:wght@300;900&display=swap"
-        rel="stylesheet"
-      />
-    )}
+    <!-- Fonts: Space Grotesk (headings) · JetBrains Mono (tech labels) · Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    {icons && (
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        crossorigin="anonymous"
-      />
-    )}
+    <!-- Material Symbols (for UI icons) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome 6 (for social brand icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+    />
 
     <slot name="head" />
   </head>
