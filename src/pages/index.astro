@@ -25,7 +25,7 @@ const posts = (await getCollection('writing'))
         Hi, I'm <strong>Mike Roberts</strong>
       </h1>
       <div class="section__subtitle section__subtitle--intro">
-        <span class="term-line"><span class="prompt">&gt;</span> engineering_manager @ google</span>
+        <span class="term-line"><span class="prompt">&gt;</span> Customer Engineering Manager @ Google</span>
         <span class="term-line">&nbsp;&nbsp;cloud security · ai · builder</span>
       </div>
     </section>
@@ -53,11 +53,6 @@ const posts = (await getCollection('writing'))
           cybersecurity, where I think the knowledge gap is widest and growing fastest.
         </p>
       </div>
-      <img
-        src="/img/IMG_2163_2.png"
-        class="about-me__img"
-        alt="Mike in Germany"
-      />
     </section>
 
     <!-- ── Apps ───────────────────────────────────────────────────────────── -->
@@ -180,11 +175,6 @@ const posts = (await getCollection('writing'))
     margin: 0 auto;
   }
 
-  .about-me__img {
-    box-shadow: 0.25em 0.25em 0.75em rgba(0,0,0,0.25),
-                0.125em 0.125em 0.25em rgba(0,0,0,0.15);
-  }
-
   .section__subtitle--about {
     display: block;
     margin: 0 0 1em;
@@ -201,34 +191,6 @@ const posts = (await getCollection('writing'))
 
   .about-me__body p {
     margin: 0 0 1em;
-  }
-
-  @media (min-width: 600px) {
-    .about-me {
-      display: grid;
-      grid-template-columns: 1fr 200px;
-      grid-template-areas:
-        "title img"
-        "subtitle img"
-        "text img";
-      grid-column-gap: 2em;
-    }
-    .section__title--about  { grid-area: title; }
-    .about-me__body         { grid-area: text; }
-    .section__subtitle--about {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      position: relative;
-      left: -1em;
-      width: calc(100% + 2em);
-      padding-left: 1em;
-      padding-right: calc(200px + 4em);
-    }
-    .about-me__img {
-      grid-area: img;
-      position: relative;
-      z-index: 2;
-    }
   }
 
   /* ── Apps ─────────────────────────────────────────────────────── */
