@@ -1,128 +1,141 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import PortfolioCard from '../components/PortfolioCard.astro';
 
-const portfolioItems = [
-  { href: 'https://5tocode.dev/easybank',     src: '/img/easybank.png',            alt: 'Easybank project' },
-  { href: 'https://miker60.sg-host.com/simaya', src: '/img/simaya_desktop.png',   alt: 'Simaya project' },
-  { href: 'https://5tocode.dev/natours',      src: '/img/natours_desktop.png',      alt: 'Natours project' },
-  { href: 'https://connected30a.com',         src: '/img/connected30a-desktop.png', alt: 'Connected30A project' },
-  { href: 'https://5tocode.dev/trillo',       src: '/img/trillo_desktop.png',       alt: 'Trillo project' },
-  { href: 'https://5tocode.dev/nexter',       src: '/img/nexter_desktop.png',       alt: 'Nexter project' },
-  { href: 'https://lit-hollows-03470.herokuapp.com/campgrounds', src: '/img/yelpcamp.png', alt: 'Yelpcamp project' },
-  { href: 'https://5tocode.dev/museumofcandy', src: '/img/museumofcandy.png',      alt: 'Museum of Candy project' },
-  { href: 'https://5tocode.dev/colorgame',    src: '/img/colorgame.png',            alt: 'Color game project' },
-  { href: 'https://5tocode.dev/simongame',    src: '/img/simongame.png',            alt: 'Simon game project' },
-  { href: 'https://5tocode.dev/tindog',       src: '/img/tindog.png',               alt: 'Tindog project' },
-  { href: 'https://5tocode.dev/drumkit',      src: '/img/drumkit.png',              alt: 'Drum kit project' },
-];
+const posts = (await getCollection('writing'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
 ---
 
 <BaseLayout
-  title="5toCode — Mike Roberts, Full Stack Web Developer"
-  description="Full Stack Web Developer based in Watersound, Florida. I build beautiful, functional websites and web applications."
+  title="Mike Roberts — Cloud Security, AI, Builder"
+  description="Engineering Manager at Google. Cloud security practitioner. Builder of AI-assisted iOS apps. Writing about AI and cybersecurity. Based in Atlanta."
   fonts={true}
   icons={true}
 >
-  <SiteHeader />
+  <!-- page-wrap enables dark mode for the entire home page without affecting other pages -->
+  <div class="page-wrap">
+    <SiteHeader />
 
-  <!-- Introduction -->
-  <section class="intro" id="home">
-    <h1 class="section__title section__title--intro">
-      Hi, I am <strong>Mike Roberts</strong>
-    </h1>
-    <p class="section__subtitle section__subtitle--intro">
-      A Full Stack Web Developer
-    </p>
-    <img
-      src="/img/mike_headshot_blackbg.jpg"
-      alt="a picture of Mike smiling"
-      class="intro__img"
-    />
-  </section>
+    <!-- ── Intro ─────────────────────────────────────────────────────────── -->
+    <section class="intro" id="home">
+      <h1 class="section__title section__title--intro">
+        Hi, I'm <strong>Mike Roberts</strong>
+      </h1>
+      <div class="section__subtitle section__subtitle--intro">
+        <span class="term-line"><span class="prompt">&gt;</span> engineering_manager @ google</span>
+        <span class="term-line">&nbsp;&nbsp;cloud security · ai · builder</span>
+      </div>
+      <img
+        src="/img/mike_headshot_blackbg.jpg"
+        alt="a picture of Mike smiling"
+        class="intro__img"
+      />
+    </section>
 
-  <!-- My Services -->
-  <section class="my-services" id="services">
-    <h2 class="section__title section__title--services">What I do</h2>
-    <div class="services">
-      <div class="service">
-        <h3>Websites</h3>
+    <!-- ── About ──────────────────────────────────────────────────────────── -->
+    <section class="about-me" id="about">
+      <h2 class="section__title section__title--about">Who I Am</h2>
+      <p class="section__subtitle section__subtitle--about">
+        based in atlanta, georgia
+      </p>
+      <div class="about-me__body">
         <p>
-          Beautiful, mobile-friendly websites for businesses and organizations
-          who want to make a great first impression on the Internet.
+          I lead a team of Customer Engineers at Google supporting Wiz, the cloud security
+          platform Google acquired earlier this year. I've worked in technology for two decades,
+          with a focus on cloud security for the past several years.
+        </p>
+        <p>
+          Outside of work, I build iOS apps using AI coding tools — a privacy-first interval
+          timer called TrainIQ and a strength training log called StrengthIQ. Both are built
+          around a simple rule: your data stays on your device.
+        </p>
+        <p>
+          I write about AI, security, and the patterns I observe at the intersection of both.
+          I'm increasingly interested in teaching — specifically at the intersection of AI and
+          cybersecurity, where I think the knowledge gap is widest and growing fastest.
         </p>
       </div>
-      <div class="service">
-        <h3>Web Applications</h3>
-        <p>
-          Interactive web applications with optional API and database
-          integration.
-        </p>
+      <img
+        src="/img/IMG_2163_2.png"
+        class="about-me__img"
+        alt="Mike in Germany"
+      />
+    </section>
+
+    <!-- ── Apps ───────────────────────────────────────────────────────────── -->
+    <section class="my-apps" id="apps">
+      <h2 class="section__title section__title--apps">What I Build</h2>
+      <p class="section__subtitle section__subtitle--apps">
+        iOS apps for people who take privacy seriously
+      </p>
+      <div class="apps">
+        <a href="/TrainIQ/" class="app-card">
+          <h3 class="app-card__name">TrainIQ</h3>
+          <p class="app-card__desc">A privacy-first interval timer. No ads, no tracking, all on-device.</p>
+          <span class="app-card__link">View App →</span>
+        </a>
+        <a href="/StrengthIQ/" class="app-card">
+          <h3 class="app-card__name">StrengthIQ</h3>
+          <p class="app-card__desc">A strength training log. Workout data never leaves your device.</p>
+          <span class="app-card__link">View App →</span>
+        </a>
       </div>
-      <div class="service">
-        <h3>E-Commerce</h3>
-        <p>
-          Seamless buying &amp; selling of your product/service over the
-          Internet, using platforms such as Shopify, Square, and BigCommerce.
+    </section>
+
+    <!-- ── Writing ────────────────────────────────────────────────────────── -->
+    <section class="my-writing" id="writing">
+      <div class="writing-inner">
+        <h2 class="section__title section__title--writing">Writing</h2>
+        <p class="section__subtitle section__subtitle--writing">
+          Notes on AI, security, and building things.
         </p>
+
+        {posts.length === 0 ? (
+          <p class="writing-empty">No articles yet — check back soon.</p>
+        ) : (
+          <div class="writing-list">
+            {posts.map(post => {
+              const date = post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric',
+              });
+              return (
+                <a href={`/writing/${post.id}/`} class="writing-item">
+                  <time class="writing-item__date" datetime={post.data.pubDate.toISOString()}>
+                    {date}
+                  </time>
+                  <h3 class="writing-item__title">{post.data.title}</h3>
+                  <p class="writing-item__desc">{post.data.description}</p>
+                </a>
+              );
+            })}
+          </div>
+        )}
+
+        <a href="/writing/" class="see-all-link">See all writing →</a>
       </div>
-    </div>
-    <a href="#work" class="btn btn--light">My Work</a>
-  </section>
+    </section>
 
-  <!-- About Me -->
-  <section class="about-me" id="about">
-    <h2 class="section__title section__title--about">Who I Am</h2>
-    <p class="section__subtitle section__subtitle--about">
-      A Web Developer based in Watersound, Florida
-    </p>
-    <div class="about-me__body">
-      <p>
-        I enjoy helping businesses and organizations create beautiful,
-        functional websites and web applications that make a great impression
-        on the Internet.
-      </p>
-      <p>
-        What sets me apart from other web developers? I find out what my
-        client's ideal outcomes look like, and work backwards from there to
-        deliver on that vision.
-      </p>
-      <p>
-        Out of the office you'll probably find me being dragged around our
-        neighborhood by our three dogs, or in our garage which we've converted
-        to a home gym.
-      </p>
-    </div>
-    <img
-      src="/img/IMG_2163_2.png"
-      class="about-me__img"
-      alt="Mike in Germany"
-    />
-  </section>
-
-  <!-- My Work -->
-  <section class="my-work" id="work">
-    <h2 class="section__title section__title--work">My Work</h2>
-    <p class="section__subtitle section__subtitle--work"></p>
-    <div class="portfolio">
-      {portfolioItems.map(item => (
-        <PortfolioCard href={item.href} src={item.src} alt={item.alt} />
-      ))}
-    </div>
-  </section>
-
-  <SiteFooter />
+    <SiteFooter />
+  </div>
 </BaseLayout>
 
 <style>
-  /* Section base */
+  /* ── Page wrapper: sets bg/text for dark mode on home page only ── */
+  .page-wrap {
+    background: var(--site-bg);
+    color: var(--site-text);
+    min-height: 100vh;
+  }
+
+  /* ── Section base ─────────────────────────────────────────────── */
   section {
     padding: 5em 2em;
   }
 
-  /* Typography scale */
+  /* ── Typography ───────────────────────────────────────────────── */
   h1 { font-size: 3rem; }
   h2 { font-size: 2.25rem; }
   h3 { font-size: 1.25rem; }
@@ -134,59 +147,41 @@ const portfolioItems = [
   }
 
   h1, h2, h3 { line-height: 1; margin: 0; }
-
   .section__title { margin-bottom: 0.25em; }
   .section__title--intro { font-weight: 300; }
   .section__title--intro strong { display: block; }
 
-  .section__subtitle {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #fff;
+  /* ── Intro ────────────────────────────────────────────────────── */
+  .intro {
+    position: relative;
   }
 
-  @media (min-width: 800px) {
-    .section__subtitle { font-size: 1.5rem; }
-  }
-
-  .section__subtitle--intro,
-  .section__subtitle--about {
-    background: #2b70e4;
-    padding: 0.25em 1em;
-    font-family: 'Source Code Pro', monospace;
-    margin-bottom: 1em;
-  }
-
-  .section__subtitle--work {
-    color: #2b70e4;
-    font-weight: 900;
-    margin-bottom: 2em;
-  }
-
-  /* Button */
-  .btn {
-    display: inline-block;
-    padding: 0.5em 2.5em;
-    background: #2b70e4;
-    color: #303030;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 900;
-    transition: transform 200ms ease-in-out;
-  }
-  .btn:hover { transform: scale(1.1); }
-  .btn--light { color: #fff; }
-
-  /* Intro section — CSS Grid named areas */
-  .intro { position: relative; }
   .intro__img {
     box-shadow: 0.25em 0.25em 0.75em rgba(0,0,0,0.25),
                 0.125em 0.125em 0.25em rgba(0,0,0,0.15);
   }
-  .section__subtitle--intro { display: inline-block; }
+
+  /* Terminal-style subtitle block */
+  .section__subtitle--intro {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.95rem;
+    background: var(--site-bg-dark-section);
+    color: #e8e8e8; /* always light — this is a terminal-dark block */
+    padding: 0.75em 1em;
+    margin-bottom: 1em;
+    border-left: 3px solid var(--site-accent);
+    display: inline-block;
+    line-height: 1.8;
+  }
+
+  .term-line {
+    display: block;
+  }
+
+  .prompt {
+    color: var(--site-accent);
+    font-weight: 900;
+  }
 
   @media (min-width: 600px) {
     .intro {
@@ -199,66 +194,51 @@ const portfolioItems = [
         "img subtitle";
       grid-template-columns: min-content max-content;
     }
+
     .intro__img {
       grid-area: img;
       min-width: 250px;
       position: relative;
       z-index: 2;
     }
+
     .section__subtitle--intro {
       align-self: start;
       grid-column: -1 / 1;
       grid-row: 2;
-      text-align: right;
       position: relative;
       left: -1.5em;
       width: calc(100% + 1.5em);
     }
   }
 
-  /* My Services section */
-  .my-services {
-    background-color: #303030;
-    background-image: url('/img/services-bg.jpg');
-    background-size: cover;
-    background-blend-mode: overlay;
-    color: #fff;
-    text-align: center;
-  }
-  .section__title--services {
-    color: #2b70e4;
-    position: relative;
-  }
-  .section__title--services::after {
-    content: '';
-    display: block;
-    width: 2em;
-    height: 1px;
-    margin: 0.5em auto 1em;
-    background: #fff;
-    opacity: 0.25;
-  }
-  .services { margin-bottom: 4em; }
-  .service { max-width: 500px; margin: 0 auto; }
-
-  @media (min-width: 800px) {
-    .services {
-      display: flex;
-      max-width: 1000px;
-      margin-right: auto;
-      margin-left: auto;
-    }
-    .service + .service { margin-left: 2em; }
-  }
-
-  /* About Me section — CSS Grid named areas */
+  /* ── About ────────────────────────────────────────────────────── */
   .about-me {
     max-width: 1000px;
     margin: 0 auto;
   }
+
   .about-me__img {
     box-shadow: 0.25em 0.25em 0.75em rgba(0,0,0,0.25),
                 0.125em 0.125em 0.25em rgba(0,0,0,0.15);
+  }
+
+  .section__subtitle--about {
+    display: block;
+    margin: 0 0 1em;
+    font-size: 1.25rem;
+    background: var(--site-accent);
+    color: #fff;
+    padding: 0.25em 1em;
+    font-family: 'Source Code Pro', monospace;
+  }
+
+  @media (min-width: 800px) {
+    .section__subtitle--about { font-size: 1.5rem; }
+  }
+
+  .about-me__body p {
+    margin: 0 0 1em;
   }
 
   @media (min-width: 600px) {
@@ -271,8 +251,8 @@ const portfolioItems = [
         "text img";
       grid-column-gap: 2em;
     }
-    .section__title--about   { grid-area: title; }
-    .about-me__body          { grid-area: text; }
+    .section__title--about  { grid-area: title; }
+    .about-me__body         { grid-area: text; }
     .section__subtitle--about {
       grid-column: 1 / -1;
       grid-row: 2;
@@ -289,38 +269,162 @@ const portfolioItems = [
     }
   }
 
-  /* My Work section */
-  .my-work {
-    background-color: #303030;
+  /* ── Apps ─────────────────────────────────────────────────────── */
+  .my-apps {
+    background: var(--site-bg-dark-section);
     color: #fff;
     text-align: center;
   }
 
-  /* Portfolio grid — auto-fit */
-  .portfolio {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 10px;
+  .section__title--apps {
+    color: var(--site-accent);
+    margin-bottom: 0.25em;
   }
 
-  .portfolio__item {
-    background: #2b70e4;
-    overflow: hidden;
+  .section__subtitle--apps {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0 0 3em;
+  }
+
+  .apps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 600px) {
+    .apps { flex-direction: row; }
+  }
+
+  .app-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 2em;
+    text-decoration: none;
+    color: inherit;
+    text-align: left;
     display: block;
+    transition: border-color 250ms, background 250ms;
   }
 
-  .portfolio__img {
-    transition:
-      transform 750ms cubic-bezier(0.5, 0, 0.5, 1),
-      opacity 250ms linear;
-    width: 100%;
+  .app-card:hover {
+    border-color: var(--site-accent);
+    background: rgba(91, 156, 246, 0.1);
   }
 
-  .portfolio__item:focus { position: relative; z-index: 2; }
+  .app-card__name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 0.5em;
+    font-family: 'Source Code Pro', monospace;
+  }
 
-  .portfolio__img:hover,
-  .portfolio__item:focus .portfolio__img {
-    transform: scale(1.2);
-    opacity: 0.5;
+  .app-card__desc {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 1.5em;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .app-card__link {
+    color: var(--site-accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── Writing ──────────────────────────────────────────────────── */
+  .my-writing {
+    /* inherits bg/color from .page-wrap */
+  }
+
+  .writing-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .section__title--writing {
+    margin-bottom: 0.25em;
+  }
+
+  .section__subtitle--writing {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1rem;
+    color: var(--site-text-muted);
+    margin: 0 0 2.5em;
+  }
+
+  .writing-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2.5em;
+  }
+
+  .writing-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--site-border);
+    padding: 1.5em 0;
+  }
+
+  .writing-item:first-child {
+    padding-top: 0;
+  }
+
+  .writing-item__date {
+    display: block;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.85rem;
+    color: var(--site-text-muted);
+    margin-bottom: 0.4em;
+  }
+
+  .writing-item__title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--site-text);
+    margin: 0 0 0.4em;
+    line-height: 1.2;
+    transition: color 200ms;
+  }
+
+  .writing-item:hover .writing-item__title {
+    color: var(--site-accent);
+  }
+
+  .writing-item__desc {
+    color: var(--site-text-muted);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .writing-empty {
+    color: var(--site-text-muted);
+    font-style: italic;
+  }
+
+  .see-all-link {
+    display: inline-block;
+    margin-top: 0.5em;
+    color: var(--site-accent);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
+  .see-all-link:hover {
+    text-decoration: underline;
   }
 </style>

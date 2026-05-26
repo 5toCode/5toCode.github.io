@@ -15,7 +15,28 @@
                       0.125em 0.125em 0.25em rgba(0,0,0,0.15);
 }
 
-/* Global base styles */
+/* ─── Semantic color tokens (used by homepage and component CSS) ─────────── */
+:root {
+  --site-bg:              #fff;
+  --site-bg-dark-section: #303030;
+  --site-text:            #303030;
+  --site-text-muted:      #666;
+  --site-accent:          #2b70e4;
+  --site-border:          rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --site-bg:              #0f1117;
+    --site-bg-dark-section: #1a1d27;
+    --site-text:            #e8e8e8;
+    --site-text-muted:      #999;
+    --site-accent:          #5b9cf6;
+    --site-border:          rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ─── Global base styles ─────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
