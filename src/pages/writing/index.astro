@@ -65,13 +65,21 @@ const posts = (await getCollection('writing')).sort(
 
   .writing-main {
     flex: 1;
-    padding: 4rem 1.5rem 5rem;
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  @media (min-width: 768px) {
+    .writing-main { padding: 4rem 1.5rem 5rem; }
   }
 
   .writing-inner {
     max-width: 720px;
     margin: 0 auto;
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .writing-inner { padding-left: 1.5rem; }
   }
 
   .writing-heading {

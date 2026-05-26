@@ -186,16 +186,19 @@ const posts = (await getCollection('writing'))
     max-width: 1280px;
     margin: 0 auto;
     width: 100%;
-    padding: 4rem 1.5rem 2rem;
+    padding: 3rem 1.25rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 6rem;
+    gap: 4rem;                /* tighter on mobile */
     position: relative;
     z-index: 1;
   }
 
   @media (min-width: 768px) {
-    .main-content { padding: 5rem 1.5rem 3rem; }
+    .main-content {
+      padding: 5rem 1.5rem 3rem;
+      gap: 6rem;              /* restore full gap on desktop */
+    }
   }
 
   /* ── Shared section typography ────────────────────────────────── */
@@ -227,13 +230,14 @@ const posts = (await getCollection('writing'))
     grid-template-columns: 1fr;
     gap: 2rem;
     align-items: center;
-    min-height: 55vh;
+    min-height: 40vh;         /* shorter on mobile */
   }
 
   @media (min-width: 900px) {
     .hero {
       grid-template-columns: 7fr 3fr;
       gap: 3rem;
+      min-height: 55vh;
     }
   }
 
@@ -274,8 +278,9 @@ const posts = (await getCollection('writing'))
     padding: 1rem 1.25rem;
     border-left: 3px solid var(--accent);
     border-radius: 2px;
-    display: inline-block;
-    align-self: flex-start;
+    display: block;           /* block so long text wraps on narrow screens */
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .terminal-text {
@@ -346,16 +351,20 @@ const posts = (await getCollection('writing'))
   .apps-section {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    padding: 3.5rem 2rem;
-    margin: 0 -1.5rem;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem;
+    margin: 0 -1.25rem;
     background: var(--bg-section);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
   @media (min-width: 768px) {
-    .apps-section { padding: 4rem 3rem; }
+    .apps-section {
+      gap: 3rem;
+      padding: 4rem 3rem;
+      margin: 0 -1.5rem;
+    }
   }
 
   .apps-header {
