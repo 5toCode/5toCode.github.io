@@ -28,11 +28,6 @@ const posts = (await getCollection('writing'))
         <span class="term-line"><span class="prompt">&gt;</span> engineering_manager @ google</span>
         <span class="term-line">&nbsp;&nbsp;cloud security · ai · builder</span>
       </div>
-      <img
-        src="/img/mike_headshot_blackbg.jpg"
-        alt="a picture of Mike smiling"
-        class="intro__img"
-      />
     </section>
 
     <!-- ── About ──────────────────────────────────────────────────────────── -->
@@ -153,12 +148,8 @@ const posts = (await getCollection('writing'))
 
   /* ── Intro ────────────────────────────────────────────────────── */
   .intro {
-    position: relative;
-  }
-
-  .intro__img {
-    box-shadow: 0.25em 0.25em 0.75em rgba(0,0,0,0.25),
-                0.125em 0.125em 0.25em rgba(0,0,0,0.15);
+    max-width: 720px;
+    margin: 0 auto;
   }
 
   /* Terminal-style subtitle block */
@@ -181,35 +172,6 @@ const posts = (await getCollection('writing'))
   .prompt {
     color: var(--site-accent);
     font-weight: 900;
-  }
-
-  @media (min-width: 600px) {
-    .intro {
-      display: grid;
-      width: min-content;
-      margin: 0 auto;
-      grid-column-gap: 1em;
-      grid-template-areas:
-        "img title"
-        "img subtitle";
-      grid-template-columns: min-content max-content;
-    }
-
-    .intro__img {
-      grid-area: img;
-      min-width: 250px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .section__subtitle--intro {
-      align-self: start;
-      grid-column: -1 / 1;
-      grid-row: 2;
-      position: relative;
-      left: -1.5em;
-      width: calc(100% + 1.5em);
-    }
   }
 
   /* ── About ────────────────────────────────────────────────────── */
