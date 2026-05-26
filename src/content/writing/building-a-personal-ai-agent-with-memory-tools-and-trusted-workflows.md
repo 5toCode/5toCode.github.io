@@ -1,6 +1,6 @@
 ---
-title: Building a Personal AI Agent with Memory, Tools, and Trusted Workflows
-description: A practical walkthrough of how I set up OpenClaw as a personal AI operating system, what choices mattered, and why useful agents need more than a good model.
+title: 'Building a Personal AI Agent with Memory, Tools, and Trusted Workflows'
+description: 'A practical walkthrough of how I set up OpenClaw as a personal AI operating system, what choices mattered, and why useful agents need more than a good model.'
 pubDate: 2026-05-26T21:15:00.000Z
 updatedDate: 2026-05-26T21:15:00.000Z
 draft: true
@@ -10,6 +10,7 @@ tags:
   - Cybersecurity
   - OpenClaw
   - Personal-AI
+heroImage: /img/4949511430378032129.jpg
 author: Mike Roberts
 ---
 
@@ -35,12 +36,12 @@ Not just a better model.
 
 The model matters, obviously. A weak model makes the whole thing feel like arguing with a confident intern. But the model is only one layer. The real product is the operating system around it:
 
-- the place where the agent runs
-- the messaging interface where I actually talk to it
-- the memory it reads and writes
-- the tools it can use
-- the guardrails around risky actions
-- the repeatable workflows it can execute without needing me to explain everything again
+* the place where the agent runs
+* the messaging interface where I actually talk to it
+* the memory it reads and writes
+* the tools it can use
+* the guardrails around risky actions
+* the repeatable workflows it can execute without needing me to explain everything again
 
 Once those pieces are in place, the experience changes. It stops feeling like "ask ChatGPT a question" and starts feeling more like having a small, opinionated operations layer for your life.
 
@@ -54,13 +55,13 @@ The browser is fine for isolated conversations. It is terrible as the center of 
 
 OpenClaw gave me the right primitives:
 
-- agent sessions with persistent context
-- a local workspace for instructions, memory, scripts, and notes
-- skills for common tool patterns
-- messaging integrations
-- cron-style automation
-- access to local commands when appropriate
-- enough configurability to make the system feel personal instead of generic
+* agent sessions with persistent context
+* a local workspace for instructions, memory, scripts, and notes
+* skills for common tool patterns
+* messaging integrations
+* cron-style automation
+* access to local commands when appropriate
+* enough configurability to make the system feel personal instead of generic
 
 That last part matters more than people think.
 
@@ -74,11 +75,11 @@ I wanted the system to be always available, but I did not want to make this more
 
 So the setup runs on a small always-on Mac in my environment. That gives me a few practical advantages:
 
-- It can interact with local macOS capabilities.
-- It can run background jobs without depending on my laptop being open.
-- It can hold local workspace state.
-- It is close to the personal apps and accounts I already use.
-- It is boring hardware, which is a compliment.
+* It can interact with local macOS capabilities.
+* It can run background jobs without depending on my laptop being open.
+* It can hold local workspace state.
+* It is close to the personal apps and accounts I already use.
+* It is boring hardware, which is a compliment.
 
 Could this run in the cloud? Sure. For some people that is probably the right answer.
 
@@ -98,10 +99,10 @@ The more important decision was not "which model wins?" It was "how do I avoid c
 
 That means:
 
-- using model configuration rather than hardcoding assumptions everywhere
-- keeping workflow logic outside the model when it should be deterministic
-- letting specialized agents or sessions handle focused jobs
-- treating model behavior as something to verify, not something to blindly trust
+* using model configuration rather than hardcoding assumptions everywhere
+* keeping workflow logic outside the model when it should be deterministic
+* letting specialized agents or sessions handle focused jobs
+* treating model behavior as something to verify, not something to blindly trust
 
 Models change fast. Architecture changes slower. I want the architecture to survive the model news cycle.
 
@@ -139,10 +140,10 @@ My OpenClaw setup uses a mix of daily notes, long-term memory, workspace instruc
 
 I think of it like this:
 
-- **Daily memory** is the scratchpad: what happened, what changed, what might matter later.
-- **Long-term memory** is the distilled version: durable preferences, decisions, relationships, and lessons.
-- **Runbooks** are operational truth: how workflows actually work.
-- **Skills and instructions** are behavior: how the agent should act in specific contexts.
+* **Daily memory** is the scratchpad: what happened, what changed, what might matter later.
+* **Long-term memory** is the distilled version: durable preferences, decisions, relationships, and lessons.
+* **Runbooks** are operational truth: how workflows actually work.
+* **Skills and instructions** are behavior: how the agent should act in specific contexts.
 
 The important part is that memory is not magic. It is maintained. It gets corrected. It gets pruned. When something important happens, it gets written down. When something moves from "interesting today" to "remember this forever," it gets promoted.
 
@@ -156,15 +157,15 @@ An assistant that can only talk will eventually frustrate you.
 
 The useful workflows started when the agent could do things:
 
-- inspect files
-- run scripts
-- check system health
-- summarize logs
-- interact with calendars and email tooling
-- process receipts
-- manage recurring checks
-- help draft and revise website content
-- keep track of workouts and other personal systems
+* inspect files
+* run scripts
+* check system health
+* summarize logs
+* interact with calendars and email tooling
+* process receipts
+* manage recurring checks
+* help draft and revise website content
+* keep track of workouts and other personal systems
 
 That does not mean every action should be delegated to the model. In fact, the opposite is true.
 
@@ -184,13 +185,13 @@ The tax workflow is a good example. At a high level, the system can help capture
 
 It has:
 
-- a clear intake path
-- known categories
-- deterministic handling where possible
-- a way to ask for missing information
-- durable records
-- backup and recovery thinking
-- enough human supervision to keep it honest
+* a clear intake path
+* known categories
+* deterministic handling where possible
+* a way to ask for missing information
+* durable records
+* backup and recovery thinking
+* enough human supervision to keep it honest
 
 The second brain workflow has a different shape. It is about capturing useful context, retrieving the right notes later, and giving the agent enough memory to help without turning every interaction into archaeology.
 
@@ -226,14 +227,14 @@ For this overview, the important point is that a personal agent is a security-se
 
 The hardening work has been less about one magic control and more about a posture:
 
-- do not put secrets in plaintext project files
-- use proper secret references or credential stores where possible
-- separate public writing from private implementation details
-- require explicit approval for external actions
-- keep risky workflows scoped
-- log and review recurring automation
-- prefer deterministic scripts for state-changing operations
-- treat "the model said it did it" as a claim, not proof
+* do not put secrets in plaintext project files
+* use proper secret references or credential stores where possible
+* separate public writing from private implementation details
+* require explicit approval for external actions
+* keep risky workflows scoped
+* log and review recurring automation
+* prefer deterministic scripts for state-changing operations
+* treat "the model said it did it" as a claim, not proof
 
 That last one is a theme in all of my AI work.
 
@@ -317,11 +318,11 @@ This article is the map.
 
 The deep dives are where the interesting details live:
 
-- how I think about securing a personal agent with real access
-- how the tax workflow turns messy inputs into structured records
-- how the second brain setup handles memory and retrieval
-- how the wine workflow became a personal knowledge system
-- how workout tracking works when the assistant remembers my actual numbers
+* how I think about securing a personal agent with real access
+* how the tax workflow turns messy inputs into structured records
+* how the second brain setup handles memory and retrieval
+* how the wine workflow became a personal knowledge system
+* how workout tracking works when the assistant remembers my actual numbers
 
 Some of those are more technical. Some are more personal. All of them come back to the same lesson:
 
