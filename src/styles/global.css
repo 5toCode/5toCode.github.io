@@ -107,7 +107,7 @@
 /* ─── Global base ────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px; /* offset fixed nav (80px) + breathing room */
+  scroll-padding-top: 116px; /* offset fixed nav (100px) + breathing room */
 }
 
 body {
