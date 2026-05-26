@@ -31,23 +31,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 
       <hr class="article-rule" />
 
-      <article
-        class="prose max-w-none
-          text-[#dde4e0] leading-relaxed
-          [&_h2]:font-display [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4
-          [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:text-white [&_h3]:mt-8 [&_h3]:mb-3
-          [&_p]:mb-5 [&_p]:text-[#bacac3]
-          [&_a]:text-[#38debb] [&_a]:underline [&_a]:underline-offset-2 [&_a]:transition-colors hover:[&_a]:text-[#5ffbd6]
-          [&_code]:font-mono [&_code]:bg-[#1a211f] [&_code]:text-[#5ffbd6] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm
-          [&_pre]:bg-[#0e1512] [&_pre]:border [&_pre]:border-[#3c4a45] [&_pre]:text-[#dde4e0] [&_pre]:p-5 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:text-sm
-          [&_pre_code]:bg-transparent [&_pre_code]:text-inherit [&_pre_code]:p-0
-          [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-5 [&_ul]:text-[#bacac3]
-          [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-5 [&_ol]:text-[#bacac3]
-          [&_li]:mb-1.5
-          [&_blockquote]:border-l-4 [&_blockquote]:border-[#38debb] [&_blockquote]:pl-5 [&_blockquote]:italic [&_blockquote]:text-[#bacac3] [&_blockquote]:bg-[#1a211f] [&_blockquote]:py-3 [&_blockquote]:pr-4 [&_blockquote]:rounded-r
-          [&_strong]:text-white [&_strong]:font-semibold
-        "
-      >
+      <article class="article-body">
         <slot />
       </article>
     </div>
@@ -55,9 +39,9 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 </BaseLayout>
 
 <style>
+  /* ── Page chrome ─────────────────────────────────────────────── */
   .article-page {
-    padding-top: 2.5rem; /* no fixed nav on article pages */
-    padding-bottom: 5rem;
+    padding: 2.5rem 0 5rem;
   }
 
   .article-wrap {
@@ -74,24 +58,21 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #38debb;
+    color: var(--accent);
     text-decoration: none;
     transition: color 0.2s;
   }
 
-  .back-link:hover {
-    color: #5ffbd6;
-  }
+  .back-link:hover { color: var(--accent-hi); }
 
-  .article-header {
-    margin-bottom: 2.5rem;
-  }
+  /* ── Article header ──────────────────────────────────────────── */
+  .article-header { margin-bottom: 2.5rem; }
 
   .article-date {
     display: block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8125rem;
-    color: #bacac3;
+    color: var(--text-muted);
     margin-bottom: 0.75rem;
   }
 
@@ -101,40 +82,144 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.01em;
-    color: #fff;
+    color: var(--text-heading);
     margin: 0 0 1rem;
   }
 
   .article-desc {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
-    color: #bacac3;
+    color: var(--text-muted);
     line-height: 1.6;
     margin: 0;
   }
 
   .article-rule {
     border: none;
-    border-top: 1px solid #3c4a45;
+    border-top: 1px solid var(--border-line);
     margin-bottom: 2.5rem;
   }
 
-  /* Images inside article markdown */
-  article :global(img) {
+  /* ── Article body (prose styles via :global) ─────────────────── */
+  .article-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  /* Paragraphs */
+  .article-body :global(p) {
+    margin: 0 0 1.5rem;
+    color: var(--text-muted);
+  }
+
+  /* Headings */
+  .article-body :global(h2) {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin: 2.5rem 0 1rem;
+    line-height: 1.2;
+  }
+
+  .article-body :global(h3) {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin: 2rem 0 0.75rem;
+    line-height: 1.25;
+  }
+
+  /* Links */
+  .article-body :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body :global(a:hover) { color: var(--accent-hi); }
+
+  /* Strong / bold */
+  .article-body :global(strong) {
+    font-weight: 700;
+    color: var(--text-heading);
+  }
+
+  /* Inline code */
+  .article-body :global(code) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    background: var(--bg-section);
+    color: var(--accent);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  /* Code blocks */
+  .article-body :global(pre) {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-line);
+    color: var(--text);
+    padding: 1.25rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .article-body :global(pre code) {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+  }
+
+  /* Lists */
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    margin: 0 0 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--text-muted);
+  }
+
+  .article-body :global(ul) { list-style: disc; }
+  .article-body :global(ol) { list-style: decimal; }
+  .article-body :global(li) { margin-bottom: 0.4rem; }
+
+  /* Blockquote */
+  .article-body :global(blockquote) {
+    border-left: 4px solid var(--accent);
+    padding: 0.75rem 1.25rem;
+    margin: 0 0 1.5rem;
+    background: var(--accent-subtle-bg);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  /* Horizontal rule */
+  .article-body :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border-line);
+    margin: 2.5rem 0;
+  }
+
+  /* Images */
+  .article-body :global(img) {
     display: block;
     max-width: 100%;
     max-height: 650px;
     width: auto;
     height: auto;
-    margin: 2.5em auto;
+    margin: 2.5rem auto;
     border-radius: 8px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  article :global(hr) {
-    border: none;
-    border-top: 1px solid #3c4a45;
-    margin: 2.5em 0;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
   }
 </style>

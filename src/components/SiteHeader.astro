@@ -9,26 +9,22 @@ const navLinks = [
 
 <header class="site-header">
   <div class="header-inner">
-    <!-- Logo -->
     <a href="/" class="header-logo" aria-label="Mike Roberts — Home">
       <img src="/img/logo.png" alt="5toCode" class="logo-img" />
       <span class="logo-name">MIKE ROBERTS</span>
     </a>
 
-    <!-- Desktop nav -->
     <nav class="desktop-nav" aria-label="Main navigation">
       {navLinks.map(({ href, label }) => (
         <a href={href} class="nav-link">{label}</a>
       ))}
     </nav>
 
-    <!-- Mobile toggle -->
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <span class="material-symbols-outlined toggle-icon">menu</span>
     </button>
   </div>
 
-  <!-- Mobile overlay -->
   <div class="mobile-nav" aria-hidden="true">
     <nav aria-label="Mobile navigation">
       {navLinks.map(({ href, label }) => (
@@ -39,17 +35,16 @@ const navLinks = [
 </header>
 
 <style is:global>
-  /* ── Fixed glass nav ─────────────────────────────────────────────── */
   .site-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(10, 25, 47, 0.75);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--nav-border);
   }
 
   .header-inner {
@@ -62,7 +57,6 @@ const navLinks = [
     margin: 0 auto;
   }
 
-  /* ── Logo ────────────────────────────────────────────────────────── */
   .header-logo {
     display: flex;
     align-items: center;
@@ -82,10 +76,9 @@ const navLinks = [
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: #ffffff;
+    color: var(--text-heading);
   }
 
-  /* ── Desktop nav ─────────────────────────────────────────────────── */
   .desktop-nav {
     display: none;
     align-items: center;
@@ -98,21 +91,20 @@ const navLinks = [
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #bacac3;
+    color: var(--text-muted);
     text-decoration: none;
     transition: color 0.2s;
   }
 
   .nav-link:hover {
-    color: #ffffff;
+    color: var(--text-heading);
   }
 
-  /* ── Mobile toggle ───────────────────────────────────────────────── */
   .nav-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #dde4e0;
+    color: var(--text);
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -124,13 +116,12 @@ const navLinks = [
     font-size: 1.5rem;
   }
 
-  /* ── Mobile overlay nav ──────────────────────────────────────────── */
   .mobile-nav {
     display: none;
     flex-direction: column;
-    background: rgba(2, 12, 27, 0.97);
+    background: var(--mobile-nav-bg);
     padding: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--nav-border);
   }
 
   .mobile-nav.is-open {
@@ -143,10 +134,10 @@ const navLinks = [
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #dde4e0;
+    color: var(--text);
     text-decoration: none;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border);
     transition: color 0.2s;
   }
 
@@ -155,10 +146,9 @@ const navLinks = [
   }
 
   .mobile-nav__link:hover {
-    color: #38debb;
+    color: var(--accent);
   }
 
-  /* ── Responsive breakpoint ───────────────────────────────────────── */
   @media (min-width: 768px) {
     .desktop-nav { display: flex; }
     .nav-toggle  { display: none; }
@@ -166,7 +156,7 @@ const navLinks = [
 </style>
 
 <script>
-  const toggle   = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const toggle    = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const mobileNav = document.querySelector<HTMLElement>('.mobile-nav');
   const icon      = toggle?.querySelector<HTMLElement>('.toggle-icon');
 

@@ -1,36 +1,117 @@
 @import "tailwindcss";
 
 @theme {
-  /* Fonts */
   --font-sans:    "Inter", sans-serif;
   --font-mono:    "JetBrains Mono", monospace;
   --font-display: "Space Grotesk", sans-serif;
-
-  /* Design system color tokens */
-  --color-background:      #0e1512;
-  --color-background-deep: #020c1b;
-  --color-surface:         #0e1512;
-  --color-surface-low:     #161d1b;
-  --color-surface-mid:     #1a211f;
-  --color-surface-bright:  #333b38;
-  --color-on-surface:      #dde4e0;
-  --color-on-surface-var:  #bacac3;
-  --color-primary:         #ffffff;
-  --color-primary-fixed:   #5ffbd6;
-  --color-primary-dim:     #38debb;
-  --color-secondary-dim:   #b9c7e4;
-  --color-outline:         #85948e;
-  --color-outline-var:     #3c4a45;
 }
 
-/* ─── Global base styles ─────────────────────────────────────────────── */
+/* ─── Theme tokens ───────────────────────────────────────────────────
+   All colors go through CSS custom properties so light/dark mode just
+   overrides :root — no JS, no class toggling.
+   ─────────────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:               #020c1b;
+  --bg-surface:       #0e1512;
+  --bg-section:       #161d1b;   /* apps section */
+
+  /* Text */
+  --text:             #dde4e0;
+  --text-muted:       #bacac3;
+  --text-dim:         #b9c7e4;
+  --text-heading:     #ffffff;
+
+  /* Accent (teal) */
+  --accent:           #38debb;
+  --accent-hi:        #5ffbd6;
+  --accent-subtle-bg: rgba(56, 222, 187, 0.08);
+  --accent-subtle-bd: rgba(56, 222, 187, 0.25);
+
+  /* Borders */
+  --border:           rgba(255, 255, 255, 0.08);
+  --border-mid:       rgba(255, 255, 255, 0.12);
+  --border-line:      #3c4a45;
+
+  /* Glassmorphism */
+  --glass:            rgba(10, 25, 47, 0.4);
+  --glass-card:       rgba(10, 25, 47, 0.7);
+  --glass-hover-bd:   rgba(95, 251, 214, 0.3);
+  --glass-hover-glow: rgba(100, 255, 218, 0.15);
+
+  /* Nav */
+  --nav-bg:           rgba(10, 25, 47, 0.75);
+  --nav-border:       rgba(255, 255, 255, 0.08);
+  --mobile-nav-bg:    rgba(2, 12, 27, 0.97);
+
+  /* Hero name */
+  --name-color:       #38debb;
+  --name-glow:        rgba(56, 222, 187, 0.35);
+
+  /* Ambient background */
+  --grid-line:        rgba(255, 255, 255, 0.025);
+  --blob-color:       rgba(56, 222, 187, 0.10);
+
+  /* Footer always stays dark */
+  --footer-bg:        #020c1b;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Backgrounds */
+    --bg:               #f8fafc;
+    --bg-surface:       #ffffff;
+    --bg-section:       #f1f5f9;
+
+    /* Text */
+    --text:             #1e293b;
+    --text-muted:       #475569;
+    --text-dim:         #64748b;
+    --text-heading:     #0f172a;
+
+    /* Accent — darker teal for contrast on light */
+    --accent:           #0f766e;
+    --accent-hi:        #0d9488;
+    --accent-subtle-bg: rgba(15, 118, 110, 0.08);
+    --accent-subtle-bd: rgba(15, 118, 110, 0.25);
+
+    /* Borders */
+    --border:           rgba(0, 0, 0, 0.07);
+    --border-mid:       rgba(0, 0, 0, 0.12);
+    --border-line:      #cbd5e1;
+
+    /* Glassmorphism — frosted white */
+    --glass:            rgba(255, 255, 255, 0.75);
+    --glass-card:       rgba(255, 255, 255, 0.9);
+    --glass-hover-bd:   rgba(15, 118, 110, 0.45);
+    --glass-hover-glow: rgba(15, 118, 110, 0.10);
+
+    /* Nav */
+    --nav-bg:           rgba(248, 250, 252, 0.88);
+    --nav-border:       rgba(0, 0, 0, 0.07);
+    --mobile-nav-bg:    rgba(248, 250, 252, 0.98);
+
+    /* Hero name */
+    --name-color:       #0f766e;
+    --name-glow:        rgba(15, 118, 110, 0.2);
+
+    /* Ambient background */
+    --grid-line:        rgba(0, 0, 0, 0.03);
+    --blob-color:       rgba(15, 118, 110, 0.06);
+
+    /* Footer stays dark in both modes */
+    --footer-bg:        #0f172a;
+  }
+}
+
+/* ─── Global base ────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #020c1b;
-  color: #dde4e0;
+  background-color: var(--bg);
+  color: var(--text);
   margin: 0;
   font-family: "Inter", sans-serif;
   line-height: 1.6;
@@ -48,32 +129,32 @@ strong {
 }
 
 :focus {
-  outline: 3px solid #38debb;
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* ─── Glassmorphism utilities (used across components) ───────────────── */
+/* ─── Glassmorphism utilities ─────────────────────────────────────── */
 .glass-panel {
-  background: rgba(10, 25, 47, 0.4);
+  background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-mid);
 }
 
 .glass-card {
-  background: rgba(10, 25, 47, 0.7);
+  background: var(--glass-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(95, 251, 214, 0.3);
-  box-shadow: 0 0 20px rgba(100, 255, 218, 0.15);
+  border-color: var(--glass-hover-bd);
+  box-shadow: 0 0 20px var(--glass-hover-glow);
 }
 
-/* ─── Tech-line left-border decoration ───────────────────────────────── */
+/* ─── Tech-line left-border accent ───────────────────────────────── */
 .tech-line {
   position: relative;
 }
@@ -85,6 +166,6 @@ strong {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #38debb;
-  opacity: 0.5;
+  background: var(--accent);
+  opacity: 0.45;
 }

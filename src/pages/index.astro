@@ -14,13 +14,21 @@ const posts = (await getCollection('writing'))
   description="Engineering Manager at Google. Cloud security practitioner. Builder of AI-assisted iOS apps. Writing about AI and cybersecurity. Based in Atlanta."
 >
   <div class="page-wrap">
+
+    <!-- Ambient decorative background (grid + gradient blob) -->
+    <div class="ambient-bg" aria-hidden="true">
+      <div class="ambient-grid"></div>
+      <div class="ambient-blob"></div>
+    </div>
+
     <SiteHeader />
 
     <main class="main-content">
 
-      <!-- ── Hero / Who I Am ──────────────────────────────────────── -->
+      <!-- ── Hero / Who I Am ───────────────────────────────────── -->
       <section class="hero" id="who-i-am">
         <div class="hero__content tech-line">
+
           <div class="hero__name-block">
             <p class="hero__hi">Hi, I'm</p>
             <h1 class="hero__name">Mike Roberts</h1>
@@ -56,13 +64,12 @@ const posts = (await getCollection('writing'))
           </div>
         </div>
 
-        <!-- Decorative ambient glow (desktop only) -->
         <div class="hero__deco" aria-hidden="true">
           <div class="hero__deco-blob"></div>
         </div>
       </section>
 
-      <!-- ── What I Build ────────────────────────────────────────── -->
+      <!-- ── What I Build ──────────────────────────────────────── -->
       <section class="apps-section" id="what-i-build">
         <div class="apps-header">
           <h2 class="section-title">What I Build</h2>
@@ -70,7 +77,6 @@ const posts = (await getCollection('writing'))
         </div>
 
         <div class="app-cards">
-          <!-- TrainIQ -->
           <a href="/TrainIQ/" class="app-card glass-card">
             <span class="app-card__icon material-symbols-outlined" aria-hidden="true">timer</span>
             <h3 class="app-card__name">TrainIQ</h3>
@@ -81,7 +87,6 @@ const posts = (await getCollection('writing'))
             </span>
           </a>
 
-          <!-- StrengthIQ -->
           <a href="/StrengthIQ/" class="app-card glass-card">
             <span class="app-card__icon material-symbols-outlined" aria-hidden="true">fitness_center</span>
             <h3 class="app-card__name">StrengthIQ</h3>
@@ -94,7 +99,7 @@ const posts = (await getCollection('writing'))
         </div>
       </section>
 
-      <!-- ── Writing ─────────────────────────────────────────────── -->
+      <!-- ── Writing ───────────────────────────────────────────── -->
       <section class="writing-section tech-line" id="writing">
         <div class="writing-header">
           <h2 class="section-title">Writing</h2>
@@ -141,10 +146,41 @@ const posts = (await getCollection('writing'))
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 80px; /* fixed nav height */
+    padding-top: 80px;
+    position: relative;
   }
 
-  /* ── Main content area ────────────────────────────────────────── */
+  /* ── Ambient background layers ────────────────────────────────── */
+  .ambient-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .ambient-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .ambient-blob {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, var(--blob-color), transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+  }
+
+  /* ── Main content (above ambient bg) ─────────────────────────── */
   .main-content {
     flex: 1;
     max-width: 1280px;
@@ -154,6 +190,8 @@ const posts = (await getCollection('writing'))
     display: flex;
     flex-direction: column;
     gap: 6rem;
+    position: relative;
+    z-index: 1;
   }
 
   @media (min-width: 768px) {
@@ -165,7 +203,7 @@ const posts = (await getCollection('writing'))
     font-family: 'Space Grotesk', sans-serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-heading);
     margin: 0 0 0.5rem;
     line-height: 1.1;
   }
@@ -178,7 +216,7 @@ const posts = (await getCollection('writing'))
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.875rem;
     letter-spacing: 0.05em;
-    color: #bacac3;
+    color: var(--text-muted);
     margin: 0;
     text-transform: uppercase;
   }
@@ -216,7 +254,7 @@ const posts = (await getCollection('writing'))
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
-    color: #bacac3;
+    color: var(--text-muted);
     margin: 0;
   }
 
@@ -226,15 +264,15 @@ const posts = (await getCollection('writing'))
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.05;
-    color: #38debb;
-    text-shadow: 0 0 30px rgba(56, 222, 187, 0.35);
+    color: var(--name-color);
+    text-shadow: 0 0 40px var(--name-glow);
     margin: 0;
   }
 
-  /* Terminal prompt block */
+  /* Terminal block */
   .terminal-block {
     padding: 1rem 1.25rem;
-    border-left: 3px solid #38debb;
+    border-left: 3px solid var(--accent);
     border-radius: 2px;
     display: inline-block;
     align-self: flex-start;
@@ -243,7 +281,7 @@ const posts = (await getCollection('writing'))
   .terminal-text {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.875rem;
-    color: #b9c7e4;
+    color: var(--text-dim);
     line-height: 1.7;
     display: flex;
     align-items: flex-start;
@@ -252,17 +290,17 @@ const posts = (await getCollection('writing'))
   }
 
   .terminal-prompt {
-    color: #38debb;
+    color: var(--accent);
     font-weight: 700;
     flex-shrink: 0;
   }
 
-  /* Body text + location badge */
+  /* Hero body + badge */
   .hero__body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    color: #bacac3;
+    color: var(--text-muted);
     font-family: 'Inter', sans-serif;
     font-size: 1.0625rem;
     line-height: 1.7;
@@ -274,18 +312,18 @@ const posts = (await getCollection('writing'))
   .location-badge {
     display: inline-block;
     align-self: flex-start;
-    background: rgba(56, 222, 187, 0.08);
-    color: #38debb;
+    background: var(--accent-subtle-bg);
+    color: var(--accent);
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 0.05em;
     padding: 0.3rem 0.75rem;
-    border: 1px solid rgba(56, 222, 187, 0.25);
+    border: 1px solid var(--accent-subtle-bd);
     border-radius: 2px;
     margin-bottom: 0.25rem;
   }
 
-  /* Decorative ambient blob (desktop) */
+  /* Decorative blob (desktop) */
   .hero__deco {
     display: none;
     justify-content: center;
@@ -300,7 +338,7 @@ const posts = (await getCollection('writing'))
     width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: radial-gradient(circle at center, rgba(56, 222, 187, 0.12), transparent 70%);
+    background: radial-gradient(circle at center, var(--accent-subtle-bg), transparent 70%);
     filter: blur(30px);
   }
 
@@ -311,13 +349,13 @@ const posts = (await getCollection('writing'))
     gap: 3rem;
     padding: 3.5rem 2rem;
     margin: 0 -1.5rem;
-    background: #161d1b;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--bg-section);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
 
   @media (min-width: 768px) {
-    .apps-section { margin: 0 -1.5rem; padding: 4rem 3rem; }
+    .apps-section { padding: 4rem 3rem; }
   }
 
   .apps-header {
@@ -352,28 +390,25 @@ const posts = (await getCollection('writing'))
     overflow: hidden;
   }
 
-  /* Decorative icon watermark */
   .app-card__icon {
     position: absolute;
     top: 1rem;
     right: 1rem;
     font-size: 4rem;
-    color: #38debb;
+    color: var(--accent);
     opacity: 0.07;
     transition: opacity 0.3s;
     pointer-events: none;
     font-variation-settings: 'FILL' 0, 'wght' 200;
   }
 
-  .app-card:hover .app-card__icon {
-    opacity: 0.18;
-  }
+  .app-card:hover .app-card__icon { opacity: 0.18; }
 
   .app-card__name {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-heading);
     margin: 0;
     position: relative;
     z-index: 1;
@@ -382,7 +417,7 @@ const posts = (await getCollection('writing'))
   .app-card__desc {
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
-    color: #bacac3;
+    color: var(--text-muted);
     margin: 0;
     line-height: 1.6;
     flex-grow: 1;
@@ -399,20 +434,16 @@ const posts = (await getCollection('writing'))
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #38debb;
+    color: var(--accent);
     margin-top: 0.75rem;
     position: relative;
     z-index: 1;
     transition: color 0.2s;
   }
 
-  .app-card:hover .app-card__cta {
-    color: #5ffbd6;
-  }
+  .app-card:hover .app-card__cta { color: var(--accent-hi); }
 
-  .app-card__arrow {
-    font-size: 1rem;
-  }
+  .app-card__arrow { font-size: 1rem; }
 
   /* ── Writing Section ──────────────────────────────────────────── */
   .writing-section {
@@ -445,8 +476,8 @@ const posts = (await getCollection('writing'))
     display: block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
-    color: #b9c7e4;
-    opacity: 0.7;
+    color: var(--text-dim);
+    opacity: 0.8;
     margin-bottom: 0.5rem;
   }
 
@@ -454,37 +485,33 @@ const posts = (await getCollection('writing'))
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-heading);
     margin: 0 0 0.5rem;
     line-height: 1.3;
     transition: color 0.2s;
   }
 
-  .writing-item:hover .writing-item__title {
-    color: #38debb;
-  }
+  .writing-item:hover .writing-item__title { color: var(--accent); }
 
   .writing-item__desc {
     font-family: 'Inter', sans-serif;
     font-size: 0.9375rem;
-    color: #bacac3;
+    color: var(--text-muted);
     margin: 0;
     line-height: 1.6;
   }
 
   .writing-item__rule {
     height: 1px;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--border);
     margin-top: 1.5rem;
     transition: background 0.2s;
   }
 
-  .writing-item:hover .writing-item__rule {
-    background: rgba(56, 222, 187, 0.25);
-  }
+  .writing-item:hover .writing-item__rule { background: var(--accent-subtle-bd); }
 
   .writing-empty {
-    color: #bacac3;
+    color: var(--text-muted);
     font-style: italic;
   }
 
@@ -497,16 +524,12 @@ const posts = (await getCollection('writing'))
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #38debb;
+    color: var(--accent);
     text-decoration: none;
     transition: color 0.2s;
   }
 
-  .see-all-link:hover {
-    color: #5ffbd6;
-  }
+  .see-all-link:hover { color: var(--accent-hi); }
 
-  .see-all-link__arrow {
-    font-size: 1rem;
-  }
+  .see-all-link__arrow { font-size: 1rem; }
 </style>
