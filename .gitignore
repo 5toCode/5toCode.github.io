@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# generated Tina files
+tina/__generated__/
+
 # dependencies
 node_modules/
 
