@@ -1,8 +1,8 @@
 ---
 title: Supervising AI While Building the Platform You Write On — Lessons from an Astro + TinaCMS Migration
 description: 'A practical account of using Claude Code to migrate a personal site to Astro and then layer on a TinaCMS publishing workflow, with notes on what the AI got right, what it got wrong, and why the muscle of supervision matters for AI, cybersecurity, and teaching.'
-pubDate: 2026-06-05T16:52:48.485Z
-updatedDate: 2026-06-05T17:17:20.293Z
+pubDate: 2026-06-02T16:52:48.485Z
+updatedDate: 2026-06-02T17:17:20.293Z
 draft: true
 tags:
   - AI
