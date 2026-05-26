@@ -134,21 +134,6 @@ export default defineConfig({
         defaultItem: writingDefaultItem,
         fields: writingFields,
       },
-      {
-        name: 'writingMdx',
-        label: 'Writing (MDX)',
-        path: 'src/content/writing',
-        format: 'mdx',
-        match: {
-          include: '**/*',
-        },
-        ui: {
-          router: writingRouter,
-          filename: writingFilename,
-        },
-        defaultItem: writingDefaultItem,
-        fields: writingFields,
-      },
     ],
   },
 });
