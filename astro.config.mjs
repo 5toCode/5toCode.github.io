@@ -7,6 +7,10 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://www.5tocode.dev',
   output: 'static',
+  redirects: {
+    '/TrainIQ':    '/trainiq/',
+    '/StrengthIQ': '/strengthiq/',
+  },
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()]
