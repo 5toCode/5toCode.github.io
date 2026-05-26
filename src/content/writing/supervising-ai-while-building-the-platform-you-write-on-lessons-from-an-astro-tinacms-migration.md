@@ -16,7 +16,7 @@ heroImage: /img/31c70485-db24-40ea-bd70-71fbe5a7d293.png
 author: Mike Roberts
 ---
 
-A few weeks ago, I wrote about the security patterns I noticed while building two iOS apps with AI coding tools. The point of that post was pretty simple: the most important skill in the age of agentic coding is not prompt engineering. It is architectural judgment. You have to know what the system should look like before you ask the AI to build it.
+A week or so ago, I wrote about the security patterns I noticed while building two iOS apps with AI coding tools. The point of that post was pretty simple: the most important skill in the age of agentic coding is not prompt engineering. It is architectural judgment. You have to know what the system should look like before you ask the AI to build it.
 
 This post is the receipt.
 
