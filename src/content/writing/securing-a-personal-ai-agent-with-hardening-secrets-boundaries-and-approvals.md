@@ -15,27 +15,23 @@ author: Mike Roberts
 
 The moment a personal AI agent gets useful, it starts making me nervous.
 
-That is not a complaint. That is the point.
+That may sound weird, but let me explain…
 
-If the agent cannot remember anything, use tools, inspect files, draft messages, run checks, or live near the systems where my actual work happens, then it is mostly a smarter chat box. Nice to have. Easy to ignore.
+If the agent cannot remember anything, use tools, inspect files, draft messages, run checks, or live near the systems where my actual work happens, then it is mostly a smarter chat box. Nice to have, but easy to ignore.
 
-The interesting version is different. It has memory. It has tools. It has recurring workflows. It can see enough context to stop asking the same dumb setup questions every time. It can help with notes, drafts, receipts, calendars, scripts, and all the other weird little systems that accumulate around a life.
+The interesting version is different: It has memory, tools, and recurring workflows. It can see enough context to stop asking the same dumb setup questions every time. It can help with notes, drafts, receipts, calendars, scripts, and all the other weird little systems that accumulate around a life.
 
-That is where the value is.
-
-That is also where the security problem starts.
+That is where the value is. But, that is also where the security problem starts.
 
 A personal agent with tools and memory is a small piece of infrastructure with a friendly interface. Small infrastructure is still infrastructure. It needs boundaries, logs, backups, secrets handling, and a sane approval model. Otherwise you have built a very polite liability.
 
-This is the security deep dive for my OpenClaw setup.
-
-I am leaving out the private stuff on purpose. No API keys. No hostnames. No IP addresses. No account identifiers. No private file paths. No exact network layout. Nothing that would help someone aim at my actual environment. The useful part is the security posture: how I think about hardening, secrets, boundaries, approvals, and verification when an AI agent has real access.
+This is the security deep dive for my OpenClaw setup: How I think about hardening, secrets, boundaries, approvals, and verification when an AI agent has real access.
 
 ## Start with the actual threat model
 
 The lazy answer is "do not give the agent access to anything important."
 
-Sure. Also do not connect your laptop to the internet. Very secure. Not especially useful.
+Sure. Also do not connect your laptop to the internet. Very secure, but not especially useful.
 
 The whole reason to build a personal agent is to give it enough access to help. If it cannot see the work, it cannot do the work. So the question is not whether the agent gets access. The question is what kind of access it gets, in which context, and what it is allowed to do without me.
 
@@ -47,7 +43,7 @@ Those do not carry the same risk.
 
 I am comfortable with the agent reading a lot of context inside the right workspace. I am much more careful about anything that sends a message, changes a record, touches credentials, or makes a public change. "Summarize this note" and "send this to another person" are different species of request.
 
-That sounds obvious when written down. It is exactly the kind of obvious thing people forget when the demo is working and the dopamine is high.
+That sounds obvious when written down. It is exactly the kind of obvious thing people forget when the demo is working.
 
 ## One giant assistant is a bad security model
 
@@ -57,7 +53,7 @@ It feels powerful. It is also sloppy.
 
 My OpenClaw setup works better when I treat agents as scoped contexts. There is a main assistant. There are workflow-specific workspaces. There are group chats with narrower expectations. There are skills for particular tools. There are short-lived sessions that exist for one job and then go away.
 
-That separation is a security control.
+That separation is a very primitive security control. Not a great one, but still useful.
 
 The agent helping with public writing does not need the same context as the agent helping with private records. A group chat should not behave like a private direct chat. A workflow that edits a draft should have a different approval bar than one that touches tax records or sends messages.
 
@@ -66,7 +62,7 @@ So I bias toward scoped context:
 * public-safe writing context stays public-safe
 * workflow instructions live with the workflow
 * private operational details stay out of public content work
-* tools are available because the job needs them, not because the demo looks cooler
+* tools are available only because the job *needs* them
 * external actions are explicit
 * group chat behavior is conservative by default
 
@@ -76,7 +72,7 @@ The less romantic version: I do not want one agent carrying a backpack full of k
 
 I am not pretending my personal agent host is a bank. I am treating it like a real system because it has real context on it.
 
-That means the basics matter. Keep the host updated. Avoid unnecessary exposed services. Use strong local authentication. Keep disk encryption on. Limit inbound access. Do not run everything with more privilege than it needs. Keep useful logs. Back up the state that matters. Test enough of the restore path to know it is not imaginary.
+That means the basics matter. I keep the host updated and avoid unnecessary exposed services. I also use strong local authentication, keep disk encryption on, limit inbound access, and do not run everything with more privilege than it needs. I also keep useful logs, back up the state that matters, and test the restore path to make sure it is not imaginary.
 
 None of this is exotic. That is why it is easy to skip.
 
@@ -112,22 +108,6 @@ Memory is sticky. A secret pasted into a chat can end up in logs, summaries, gen
 
 That is how "just this once" becomes credential archaeology.
 
-## Public writing gets a hard privacy filter
-
-This article is being written by the same kind of system it describes. That is useful, and also a little funny in the uncomfortable way.
-
-The agent has access to context that should never show up in public writing. So the rule for public content is simple:
-
-Explain the pattern. Do not publish the operational detail.
-
-It is fine to say that I use scoped workspaces, keep secrets out of markdown memory, separate public and private contexts, require approval for external actions, and treat sensitive workflows differently from casual ones.
-
-It is not fine to publish exact account names, hostnames, IP addresses, private file paths, credential names, internal tokens, exact firewall rules, private repository names, screenshots with sensitive context, or logs with identifiers that should stay private.
-
-The reader does not need those details anyway.
-
-Architecture is useful. Targeting information is not. If anything, too much private detail makes the article worse because it distracts from the pattern and creates risk for no payoff.
-
 ## Approval is part of the interface
 
 Approvals get treated like friction. Sometimes they are. A system that asks for permission every three seconds is not secure; it is annoying.
@@ -145,18 +125,6 @@ The approval prompt also has to be specific.
 "I am going to send this exact message to this recipient using this account. Approve?" is a real checkpoint.
 
 That distinction matters. Vague approval mostly tests whether the human is tired. Specific approval gives the human something to inspect.
-
-## Group chats are lower-trust surfaces
-
-OpenClaw can work through messaging surfaces, including group chats. That is one of the things I like about it. It also changes the privacy model.
-
-A group chat is not a private command shell. The agent should behave like a participant in that room, not like my private assistant reading from every notebook it has ever seen.
-
-In a group, the agent needs to be selective. Do not reveal private user context just because it is available. Do not answer every message. Do not act on ambiguous instructions from someone who should not control the workflow. Be careful when quoting or summarizing private material. Keep responses short unless the group asks for detail.
-
-The agent should know more than it says.
-
-That is not coy. That is basic data handling.
 
 ## Memory needs hygiene
 
