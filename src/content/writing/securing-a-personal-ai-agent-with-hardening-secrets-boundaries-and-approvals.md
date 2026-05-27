@@ -1,5 +1,5 @@
 ---
-title: 'Securing a Personal AI Agent with Hardening, Secrets, Boundaries, and Approvals'
+title: 'Securing OpenClaw with Hardening, Secrets, Boundaries, and Approvals'
 description: 'A practical security deep dive on running a personal AI agent with real tools, local memory, secrets, approvals, and workflow boundaries without turning it into a liability.'
 pubDate: 2026-05-27T14:30:00.000Z
 updatedDate: 2026-05-27T14:30:00.000Z
