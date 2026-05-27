@@ -1,6 +1,6 @@
 ---
-title: 'Securing a Personal AI Agent with Hardening, Secrets, Boundaries, and Approvals'
-description: 'A practical security deep dive on running a personal AI agent with real tools, local memory, secrets, approvals, and workflow boundaries without turning it into a liability.'
+title: 'Securing OpenClaw with Hardening, Secrets, Boundaries, and Approvals'
+description: 'A practical security deep dive on running OpenClaw with real tools, local memory, secrets, approvals, and workflow boundaries without turning it into a liability.'
 pubDate: 2026-05-27T14:30:00.000Z
 updatedDate: 2026-05-27T14:30:00.000Z
 draft: true
@@ -111,16 +111,16 @@ The approval rule I keep coming back to is simple: draft freely, send carefully,
 
 The agent can gather context, prepare a draft, propose an action, and show me the exact output. Then I approve the part that crosses the boundary into someone else's world. That's not a lack of trust. That's how trust survives contact with real workflows.
 
----
+***
 
 Before you build, write down the answers to these:
 
-- What should the agent never store?
-- What should it never send without approval?
-- Which workspaces are public-safe?
-- Which tools are read-only vs. state-changing?
-- Which actions are reversible?
-- What needs to be backed up?
-- What would hurt if exposed?
+* What should the agent never store?
+* What should it never send without approval?
+* Which workspaces are public-safe?
+* Which tools are read-only vs. state-changing?
+* Which actions are reversible?
+* What needs to be backed up?
+* What would hurt if exposed?
 
 These are design questions, not compliance ones. The point is to keep the agent useful enough to matter and controlled enough to trust.
