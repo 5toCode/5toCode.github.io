@@ -3,7 +3,7 @@ title: Supervising AI While Building the Platform You Write On — Lessons from 
 description: 'A practical account of using Claude Code to migrate a personal site to Astro and then layer on a TinaCMS publishing workflow, with notes on what the AI got right, what it got wrong, and why the muscle of supervision matters for AI, cybersecurity, and teaching.'
 pubDate: 2026-06-01T16:52:48.485Z
 updatedDate: 2026-06-01T17:17:20.293Z
-draft: true
+draft: false
 tags:
   - AI
   - Coding
@@ -16,7 +16,7 @@ heroImage: /img/31c70485-db24-40ea-bd70-71fbe5a7d293.png
 author: Mike Roberts
 ---
 
-A week or so ago, I wrote about the security patterns I noticed while building two iOS apps with AI coding tools. The point of that post was pretty simple: the most important skill in the age of agentic coding is not prompt engineering. It is architectural judgment. You have to know what the system should look like before you ask the AI to build it.
+A few days ago, I wrote about the security patterns I noticed while building two iOS apps with AI coding tools. The point of that post was pretty simple: the most important skill in the age of agentic coding is not prompt engineering. It is architectural judgment. You have to know what the system should look like before you ask the AI to build it.
 
 This post is the receipt.
 
