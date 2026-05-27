@@ -1,5 +1,5 @@
 ---
-title: 'Building a Personal AI Agent with Memory, Tools, and Trusted Workflows'
+title: 'Building an OpenClaw Agent with Memory, Tools, and Trusted Workflows'
 description: 'A practical walkthrough of how I set up OpenClaw as a personal AI operating system, what choices mattered, and why useful agents need more than a good model.'
 pubDate: 2026-05-26T21:15:00.000Z
 updatedDate: 2026-05-26T21:15:00.000Z
