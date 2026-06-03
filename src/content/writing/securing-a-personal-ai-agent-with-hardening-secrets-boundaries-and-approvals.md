@@ -3,7 +3,7 @@ title: 'Securing a Personal AI Agent with Hardening, Secrets, Boundaries, and Ap
 description: 'A practical security deep dive on running a personal AI agent with real tools, local memory, secrets, approvals, and workflow boundaries without turning it into a liability.'
 pubDate: 2026-05-27T14:30:00.000Z
 updatedDate: 2026-06-03T00:00:00.000Z
-draft: true
+draft: false
 tags:
   - AI
   - Agents
@@ -75,16 +75,16 @@ Ultimately, the approval principle I keep coming back to is simple: **draft free
 
 That's not a lack of trust. That's how trust survives contact with real workflows.
 
----
+***
 
 Before building, it's worth writing down honest answers to a few design questions:
 
-- What should the agent never store?
-- What should it never send without explicit approval?
-- Which workspaces are genuinely public-safe?
-- Which tools are read-only versus state-changing?
-- Which actions are reversible, and which aren't?
-- What needs to be backed up, and what's the restore plan?
-- What would actually hurt if it were exposed?
+* What should the agent never store?
+* What should it never send without explicit approval?
+* Which workspaces are genuinely public-safe?
+* Which tools are read-only versus state-changing?
+* Which actions are reversible, and which aren't?
+* What needs to be backed up, and what's the restore plan?
+* What would actually hurt if it were exposed?
 
 These aren't compliance questions. They're the design decisions that determine whether the system stays useful and trustworthy — or becomes something you're afraid to run.
